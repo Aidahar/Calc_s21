@@ -1,0 +1,1 @@
+GCC=-Wall -Wextra -Werror -std=c11
