@@ -1,5 +1,13 @@
 # Prerequisites
 *.d
+report/
+.vscode/
+*.gcda
+*.gcno
+*.info
+a.out
+test
+
 
 # Object files
 *.o
