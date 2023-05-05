@@ -4,12 +4,15 @@
 #include "s21_helper.h"
 
 typedef struct Node {
-  int token;
+  int prior;
+  char symb;
   struct Node *next;
 } node;
 
-int create_node(node **patr, int token);
-void push_back(node **patr, int token);
+int create_node(node **patr, int prior, char b);
+void push_back(node **patr, int prior, char b);
+void pop_back(node **patr, int *prior, char *b);
 void free_node(node *patr);
+void print_list(node *patr);
 
 #endif  // SRC_STACK_H
