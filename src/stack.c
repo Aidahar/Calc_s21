@@ -1,18 +1,17 @@
 #include "stack.h"
 
 int main(void) {
+  int prior;
+  char sym;
   node *test = NULL;
   create_node(&test, low, '+');
   push_back(&test, high, '(');
   push_back(&test, high, ')');
   push_back(&test, mid, '*');
-  int prior;
-  char sym;
   pop_back(&test, &prior, &sym);
   printf("prior = %d, symbol = %c\n", prior, sym);
   pop_back(&test, &prior, &sym);
   printf("prior = %d, symbol = %c\n", prior, sym);
-  print_list(test);
   free_node(test);
   return 0;
 }
@@ -43,11 +42,12 @@ void push_back(node **patr, int prior, char b) {
 
 void pop_back(node **patr, int *prior, char *b) {
   node *tmp = *patr;
-  while (NULL != tmp->next) {
+  while (NULL != tmp->next->next) {
     tmp = tmp->next;
   }
   *prior = tmp->prior;
   *b = tmp->symb;
+  tmp = NULL;
 }
 
 void free_node(node *patr) {
