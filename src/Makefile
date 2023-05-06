@@ -1,4 +1,4 @@
 GCC=-Wall -Wextra -Werror -std=c11
 
 clean: 
-	rm -rf a.out *.dSYM
+	rm -rf a.out *.dSYM *.o test

@@ -5,13 +5,18 @@ int main(void) {
   char sym;
   node *test = NULL;
   create_node(&test, low, '+');
-  push_back(&test, high, '(');
-  push_back(&test, high, ')');
-  push_back(&test, mid, '*');
-  pop_back(&test, &prior, &sym);
+  push_back(test, high, '(');
+  push_back(test, high, ')');
+  push_back(test, mid, '*');
+  printf("all stack\n");
+  print_list(test);
+  printf("pop symbols\n");
+  pop_back(test, &prior, &sym);
   printf("prior = %d, symbol = %c\n", prior, sym);
-  pop_back(&test, &prior, &sym);
+  pop_back(test, &prior, &sym);
   printf("prior = %d, symbol = %c\n", prior, sym);
+  printf("print stack again\n");
+  print_list(test);
   free_node(test);
   return 0;
 }
@@ -30,32 +35,35 @@ int create_node(node **patr, int prior, char b) {
   return status;
 }
 
-void push_back(node **patr, int prior, char b) {
+void push_back(node *patr, int prior, char b) {
   node *new = NULL;
   create_node(&new, prior, b);
-  node *cur = *patr;
+  node *cur = patr;
   while (NULL != cur->next) {
     cur = cur->next;
   }
   cur->next = new;
 }
 
-void pop_back(node **patr, int *prior, char *b) {
-  node *tmp = *patr;
-  while (NULL != tmp->next->next) {
-    tmp = tmp->next;
+void pop_back(node *patr, int *prior, char *b) {
+  node *end = patr;
+  node *prev = NULL;
+  while (NULL != end->next) {
+    prev = end;
+    end = end->next;
   }
-  *prior = tmp->prior;
-  *b = tmp->symb;
-  tmp = NULL;
+  *prior = end->prior;
+  *b = end->symb;
+  prev->next = NULL;
+  free(end);
 }
 
 void free_node(node *patr) {
-  node *p = patr;
-  while (NULL != p) {
-    p = patr->next;
+  node *curent = patr;
+  while (NULL != curent) {
+    curent = patr->next;
     free(patr);
-    patr = p;
+    patr = curent;
   }
 }
 
