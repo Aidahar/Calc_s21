@@ -14,3 +14,8 @@ int is_digit(char data) {
   }
   return status;
 }
+
+int is_fun(char *data) {
+  int status = ERR;
+  return status;
+}
