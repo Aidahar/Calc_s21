@@ -9,7 +9,7 @@ int len_data(char *data) {
 
 int is_digit(char data) {
   int status = ERR;
-  if (0 <= data && 9 <= data) {
+  if (48 <= data && data <= 57) {
     status = OK;
   }
   return status;
@@ -17,5 +17,6 @@ int is_digit(char data) {
 
 int is_fun(char *data) {
   int status = ERR;
+  (void)data;
   return status;
 }

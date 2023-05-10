@@ -2,16 +2,28 @@
 
 #include "s21_helper.h"
 
-int parse_string(char *data) {
+int main(void) {
+  char *data = "0+sin(X)";
+  char *notation = (char *)malloc(sizeof(char) * len_data(data));
+  int status = parse_string(data, notation);
+  printf("data = %s\n", data);
+  printf("status = %d\n", status);
+  printf("notation = %s\n", notation);
+
+  return 0;
+}
+
+int parse_string(char *data, char *notation) {
   node stack;
   int status = OK;
   if (data) {
     int len = len_data(data), idx, jdx;
-    char *parsed_string = (char *)malloc(sizeof(char)*len);
     for (idx = 0, jdx = 0; idx < len; ++idx) {
-      if (if_digit(data[idx])) {
-        parsed_string[jdx] = data[idx];
+      if (is_digit(data[idx])) {
+        notation[jdx] = data[idx];
         ++jdx;
+      } else if ('(' == data[idx]) {
+        create_node(&stack, 1, data[idx]);
       }
     }
   } else {
