@@ -7,7 +7,7 @@ report/
 *.info
 a.out
 test
-
+.gdb_history
 
 # Object files
 *.o

@@ -1,6 +1,8 @@
 #include "parse_string.h"
 
-#include "s21_helper.h"
+// #include "s21_helper.h"
+// #include "stack.h"
+#include <stdio.h>
 
 int main(void) {
   char *data = "0+sin(X)";
@@ -9,12 +11,11 @@ int main(void) {
   printf("data = %s\n", data);
   printf("status = %d\n", status);
   printf("notation = %s\n", notation);
-
   return 0;
 }
 
 int parse_string(char *data, char *notation) {
-  node stack;
+  node *stack = NULL;
   int status = OK;
   if (data) {
     int len = len_data(data), idx, jdx;
@@ -23,11 +24,28 @@ int parse_string(char *data, char *notation) {
         notation[jdx] = data[idx];
         ++jdx;
       } else if ('(' == data[idx]) {
-        create_node(&stack, 1, data[idx]);
+        if (stack) {
+          push_back(stack, 2, data[idx]);
+        } else {
+          create_node(&stack, 2, data[idx]);
+        }
+      } else if ('*' == data[idx] || '/' == data[idx] || '%' == data[idx]) {
+        if (stack) {
+          push_back(stack, 1, data[idx]);
+        } else {
+          create_node(&stack, 1, data[idx]);
+        }
+      } else if ('+' == data[idx] || '-' == data[idx]) {
+        if (stack) {
+          push_back(stack, 0, data[idx]);
+        } else {
+          create_node(&stack, 0, data[idx]);
+        }
       }
     }
   } else {
     status = ERR;
   }
+  print_list(stack);
   return status;
 }
