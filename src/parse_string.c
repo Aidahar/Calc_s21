@@ -1,11 +1,9 @@
 #include "parse_string.h"
 
-// #include "s21_helper.h"
-// #include "stack.h"
-#include <stdio.h>
+// #include <stdio.h>
 
 int main(void) {
-  char *data = "0+sin(X)";
+  char *data = "0+asin(X)*sin(X)";
   char *notation = (char *)malloc(sizeof(char) * len_data(data));
   int status = parse_string(data, notation);
   printf("data = %s\n", data);
@@ -16,44 +14,46 @@ int main(void) {
 
 int parse_string(char *data, char *notation) {
   node *stack = NULL;
-  int status = OK;
+  int status = ERR;
   if (data) {
-    int len = len_data(data), idx, jdx;
-    for (idx = 0, jdx = 0; idx < len; ++idx) {
-      if (is_digit(data[idx])) {
-        notation[jdx] = data[idx];
+    int jdx, idx;
+    char *p;
+    for (p = data, jdx = 0; *p; ++idx, ++p) {
+      if (is_digit(*p)) {
+        notation[jdx] = *p;
         ++jdx;
-      } else if ('(' == data[idx]) {
+        status = OK;
+      }  else if ('(' == *p) {
         if (stack) {
-          push_back(stack, 2, data[idx]);
+          push_back(stack, high, *p);
         } else {
-          create_node(&stack, 2, data[idx]);
+          create_node(&stack, high, *p);
         }
-      } else if ('*' == data[idx] || '/' == data[idx] || '%' == data[idx]) {
+        status = OK;
+      }  else if ('*' == *p || '/' == *p || '%' == *p) {
+          if (stack) {
+            push_back(stack, mid, *p);
+          } else {
+            create_node(&stack, mid, *p);
+          }
+          status = OK;
+      } else if ('+' == *p || '-' == *p) {
         if (stack) {
-          push_back(stack, 1, data[idx]);
+          push_back(stack, low, *p);
         } else {
-          create_node(&stack, 1, data[idx]);
+          create_node(&stack, low, *p);
         }
-      } else if ('+' == data[idx] || '-' == data[idx]) {
-        if (stack) {
-          push_back(stack, 0, data[idx]);
-        } else {
-          create_node(&stack, 0, data[idx]);
-        }
-      } else if ('s' == data[idx] || 'c' == data[idx] || 'a' == data[idx] ||
-                 't' == data[idx] || 'l' == data[idx]) {
-        if (is_func(data, &stack, idx)) {
-          // if (stack) {
-          //   push_back(stack, 1, data[idx]);
-          // } else {
-          //   create_node(&stack, 1, data[idx]);
-          // }
+        status = OK;
+      } else if ('s' == *p || 'c' == *p || 'a' == *p ||
+                 't' == *p || 'l' == *p) {
+        if (is_func(p, &stack, &idx)) {
+          for(;1 < idx ; --idx, ++p) {
+          }
+          status = OK;
         }
       }
+      idx = 0;
     }
-  } else {
-    status = ERR;
   }
   print_list(stack);
   return status;
