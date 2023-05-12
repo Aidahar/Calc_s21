@@ -47,14 +47,14 @@ void push_back(node *patr, int prior, char b) {
 
 void pop_back(node *patr, int *prior, char *b) {
   node *end = patr;
-  node *prev = NULL;
+  // node *prev = NULL;
   while (NULL != end->next) {
-    prev = end;
+    // prev = end;
     end = end->next;
   }
   *prior = end->prior;
   *b = end->symb;
-  prev->next = NULL;
+  // prev->next = NULL;
   free(end);
 }
 
@@ -76,5 +76,5 @@ void print_list(node *patr) {
 }
 
 // void add_stack(node **stack, char data, int prior) {
-  
+
 // }

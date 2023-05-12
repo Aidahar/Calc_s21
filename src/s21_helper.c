@@ -15,8 +15,17 @@ int is_digit(char data) {
   return status;
 }
 
-int is_fun(char *data) {
+int is_func(char *data, node **stack, int idx) {
   int status = ERR;
-  (void)data;
+  if (strstr(data, "sin")) {
+    if (stack) {
+      push_back(*stack, 1, data[idx]);
+    } else {
+      create_node(*&stack, 1, data[idx]);
+    }
+    status = OK;
+  } else if (strstr(data, "cos")) {
+    status = OK;
+  }
   return status;
 }

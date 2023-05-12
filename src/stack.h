@@ -1,13 +1,13 @@
 #ifndef SRC_STACK_H
 #define SRC_STACK_H
 
-#include "s21_helper.h"
-
 typedef struct Node {
   int prior;
   char symb;
   struct Node *next;
 } node;
+
+#include "s21_helper.h"
 
 int create_node(node **patr, int prior, char b);
 void push_back(node *patr, int prior, char b);

@@ -41,6 +41,15 @@ int parse_string(char *data, char *notation) {
         } else {
           create_node(&stack, 0, data[idx]);
         }
+      } else if ('s' == data[idx] || 'c' == data[idx] || 'a' == data[idx] ||
+                 't' == data[idx] || 'l' == data[idx]) {
+        if (is_func(data, &stack, idx)) {
+          // if (stack) {
+          //   push_back(stack, 1, data[idx]);
+          // } else {
+          //   create_node(&stack, 1, data[idx]);
+          // }
+        }
       }
     }
   } else {
