@@ -3,12 +3,13 @@
 // #include <stdio.h>
 
 int main(void) {
-  char *data = "0+asin(X)*sin(X)";
+  char *data = "0+asin(X)*2*sin(X)";
   char *notation = (char *)malloc(sizeof(char) * len_data(data));
   int status = parse_string(data, notation);
   printf("data = %s\n", data);
   printf("status = %d\n", status);
-  printf("notation = %s\n", notation);
+  print_notion(notation);
+  free(notation);
   return 0;
 }
 
@@ -24,27 +25,15 @@ int parse_string(char *data, char *notation) {
         ++jdx;
         status = OK;
       }  else if ('(' == *p) {
-        if (stack) {
-          push_back(stack, high, *p);
-        } else {
-          create_node(&stack, high, *p);
-        }
+        add_stack(&stack, *p, high);
         status = OK;
       }  else if ('*' == *p || '/' == *p || '%' == *p) {
-          if (stack) {
-            push_back(stack, mid, *p);
-          } else {
-            create_node(&stack, mid, *p);
-          }
-          status = OK;
-      } else if ('+' == *p || '-' == *p) {
-        if (stack) {
-          push_back(stack, low, *p);
-        } else {
-          create_node(&stack, low, *p);
-        }
+        add_stack(&stack, *p, mid);
         status = OK;
-      } else if ('s' == *p || 'c' == *p || 'a' == *p ||
+      }  else if ('+' == *p || '-' == *p) {
+        add_stack(&stack, *p, low);
+        status = OK;
+      }  else if ('s' == *p || 'c' == *p || 'a' == *p ||
                  't' == *p || 'l' == *p) {
         if (is_func(p, &stack, &idx)) {
           for(;1 < idx ; --idx, ++p) {
@@ -56,5 +45,6 @@ int parse_string(char *data, char *notation) {
     }
   }
   print_list(stack);
+  free_node(stack);
   return status;
 }

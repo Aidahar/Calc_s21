@@ -75,6 +75,10 @@ void print_list(node *patr) {
   }
 }
 
-// void add_stack(node **stack, char data, int prior) {
-
-// }
+void add_stack(node **stack, char data, int prior) {
+  if (*stack) {
+    push_back(*stack, prior, data);
+  } else {
+    create_node(stack, prior, data);
+  }
+}

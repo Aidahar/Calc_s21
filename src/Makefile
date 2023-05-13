@@ -1,11 +1,15 @@
-GCC=-Wall -Wextra -Werror -std=c11
+GCC=gcc -Wall -Wextra -Werror -std=c11
 FILES=s21_helper.c parse_string.c stack.c
-DEBUG= -g -O3
+RELEASE= -O3
+DEBUG= -g -O3 #-fsanitize=address
 
 all: debug
 
+release: ${FILES}
+	${GCC} ${RELEASE} ${FILES}
+
 debug: ${FILES}
-	gcc ${GCC} ${DEBUG} ${FILES}
+	${GCC} ${DEBUG} ${FILES} && ./a.out
 
 clean: 
 	rm -rf a.out *.dSYM *.o test .gdb_history
