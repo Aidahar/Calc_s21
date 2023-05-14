@@ -4,7 +4,7 @@
 
 int main(void) {
   char *data = "0+asin(X)*2*sin(X)";
-  char *notation = (char *)malloc(sizeof(char) * len_data(data));
+  char *notation = (char *)calloc(sizeof(char), len_data(data));
   int status = parse_string(data, notation);
   printf("data = %s\n", data);
   printf("status = %d\n", status);
