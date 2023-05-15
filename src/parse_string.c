@@ -25,13 +25,13 @@ int parse_string(char *data, char *notation) {
         ++jdx;
         status = OK;
       }  else if ('(' == *p) {
-        add_stack(&stack, *p, high);
+        add_stack(&stack, *p, L_BR);
         status = OK;
       }  else if ('*' == *p || '/' == *p || '%' == *p) {
-        add_stack(&stack, *p, mid);
+        add_stack(&stack, *p, M_D);
         status = OK;
       }  else if ('+' == *p || '-' == *p) {
-        add_stack(&stack, *p, low);
+        add_stack(&stack, *p, P_M);
         status = OK;
       }  else if ('s' == *p || 'c' == *p || 'a' == *p ||
                  't' == *p || 'l' == *p) {
@@ -40,6 +40,9 @@ int parse_string(char *data, char *notation) {
           }
           status = OK;
         }
+      } else if (')' == *p) {
+        add_stack(&stack, *p, R_BR);
+        status = OK;
       }
       idx = 0;
     }

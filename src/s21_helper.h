@@ -10,7 +10,7 @@
 
 
 enum status { ERR, OK };
-enum prior { low, mid, high };
+enum prior { L_BR, R_BR, P_M, M_D, POW };
 enum fun { SIN, COS, TAN, ASIN, ACOS, ATAN, SQRT, LN, LOG };
 
 int is_digit(char data);
