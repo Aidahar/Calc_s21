@@ -3,7 +3,7 @@
 // #include <stdio.h>
 
 int main(void) {
-  char *data = "0+asin(X)*2*sin(X)";
+  char *data = "(1+2)*(2*3)";
   char *notation = (char *)calloc(sizeof(char), len_data(data));
   int status = parse_string(data, notation);
   printf("data = %s\n", data);
@@ -41,7 +41,19 @@ int parse_string(char *data, char *notation) {
           status = OK;
         }
       } else if (')' == *p) {
-        add_stack(&stack, *p, R_BR);
+        int pr;
+        char b;
+        pop_back(&stack, &pr, &b);
+        notation[jdx] = b;
+        ++jdx;
+        while ('(' != b) {
+          pop_back(&stack, &pr, &b);
+          if (b != '(') {
+            notation[jdx] = b;
+            ++jdx;
+          }
+        }
+        // ++jdx;
         status = OK;
       }
       idx = 0;

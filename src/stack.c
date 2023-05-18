@@ -45,17 +45,24 @@ void push_back(node *patr, int prior, char b) {
   cur->next = new;
 }
 
-void pop_back(node *patr, int *prior, char *b) {
-  node *end = patr;
-  // node *prev = NULL;
-  while (NULL != end->next) {
-    // prev = end;
-    end = end->next;
+void pop_back(node **patr, int *prior, char *b) {
+  if (NULL != *patr) {
+    if ((*patr)->next == NULL) {
+      *prior = (*patr)->prior;
+      *b = (*patr)->symb;
+      (*patr) = NULL;
+    } else {
+      node *end = *patr;
+      while (NULL != end->next->next) {
+        end = end->next;
+      }
+      *prior = end->next->prior;
+      *b = end->next->symb;
+      node *del = end->next;
+      end->next = NULL;
+      free(del);
+    }
   }
-  *prior = end->prior;
-  *b = end->symb;
-  // prev->next = NULL;
-  free(end);
 }
 
 void free_node(node *patr) {
