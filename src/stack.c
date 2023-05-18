@@ -89,3 +89,11 @@ void add_stack(node **stack, char data, int prior) {
     create_node(stack, prior, data);
   }
 }
+
+int check_stach(node **stack) {
+  int status = ERR;
+  if (NULL == *stack) {
+    status = OK;
+  }
+  return status;
+}

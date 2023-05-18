@@ -3,7 +3,7 @@
 // #include <stdio.h>
 
 int main(void) {
-  char *data = "(1+2)*(2*3)";
+  char *data = "sqrt(2)-1/2*sin(2*2-2)";
   char *notation = (char *)calloc(sizeof(char), len_data(data));
   int status = parse_string(data, notation);
   printf("data = %s\n", data);
@@ -19,33 +19,37 @@ int parse_string(char *data, char *notation) {
   if (data) {
     int jdx, idx;
     char *p;
+    int pr;
+    char b;
     for (p = data, jdx = 0; *p; ++idx, ++p) {
       if (is_digit(*p)) {
         notation[jdx] = *p;
         ++jdx;
         status = OK;
-      }  else if ('(' == *p) {
+      } else if ('(' == *p) {
         add_stack(&stack, *p, L_BR);
         status = OK;
-      }  else if ('*' == *p || '/' == *p || '%' == *p) {
+      } else if ('*' == *p || '/' == *p || '%' == *p) {
         add_stack(&stack, *p, M_D);
         status = OK;
-      }  else if ('+' == *p || '-' == *p) {
+      } else if ('+' == *p || '-' == *p) {
         add_stack(&stack, *p, P_M);
         status = OK;
-      }  else if ('s' == *p || 'c' == *p || 'a' == *p ||
-                 't' == *p || 'l' == *p) {
+      } else if ('s' == *p || 'c' == *p || 'a' == *p || 't' == *p ||
+                 'l' == *p) {
         if (is_func(p, &stack, &idx)) {
-          for(;1 < idx ; --idx, ++p) {
+          for (; 1 < idx; --idx, ++p) {
           }
-          status = OK;
+          notation[jdx] = status = OK;
+        } else {
+          status = ERR;
         }
       } else if (')' == *p) {
-        int pr;
-        char b;
         pop_back(&stack, &pr, &b);
-        notation[jdx] = b;
-        ++jdx;
+        if (b != '(') {
+          notation[jdx] = b;
+          ++jdx;
+        }
         while ('(' != b) {
           pop_back(&stack, &pr, &b);
           if (b != '(') {
@@ -53,10 +57,14 @@ int parse_string(char *data, char *notation) {
             ++jdx;
           }
         }
-        // ++jdx;
         status = OK;
       }
       idx = 0;
+    }
+    while (!check_stach(&stack)) {
+      pop_back(&stack, &pr, &b);
+      notation[jdx] = b;
+      ++jdx;
     }
   }
   print_list(stack);
