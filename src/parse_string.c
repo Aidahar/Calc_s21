@@ -3,7 +3,7 @@
 // #include <stdio.h>
 
 int main(void) {
-  char *data = "sqrt(2)-1/2*sin(2*2-2)";
+  char *data = "(2+2+2*2)";
   char *notation = (char *)calloc(sizeof(char), len_data(data));
   int status = parse_string(data, notation);
   printf("data = %s\n", data);
@@ -27,20 +27,33 @@ int parse_string(char *data, char *notation) {
         ++jdx;
         status = OK;
       } else if ('(' == *p) {
-        add_stack(&stack, *p, L_BR);
-        status = OK;
-      } else if ('*' == *p || '/' == *p || '%' == *p) {
-        add_stack(&stack, *p, M_D);
+        add_stack(&stack, *p, BR);
         status = OK;
       } else if ('+' == *p || '-' == *p) {
         add_stack(&stack, *p, P_M);
+        status = OK;
+      } else if ('*' == *p || '/' == *p || '%' == *p) {
+        if (stack) {
+          if (stack->prior <= M_D) {
+            notation[jdx] = b;
+            ++jdx;
+          }
+        }
+        add_stack(&stack, *p, M_D);
+        status = OK;
+      } else if ('^' == *p) {
+        if (stack) {
+          if (stack->prior) {
+          }
+        }
+        add_stack(&stack, *p, POW);
         status = OK;
       } else if ('s' == *p || 'c' == *p || 'a' == *p || 't' == *p ||
                  'l' == *p) {
         if (is_func(p, &stack, &idx)) {
           for (; 1 < idx; --idx, ++p) {
           }
-          notation[jdx] = status = OK;
+          status = OK;
         } else {
           status = ERR;
         }
@@ -56,6 +69,11 @@ int parse_string(char *data, char *notation) {
             notation[jdx] = b;
             ++jdx;
           }
+        }
+        if (stack->prior == 1) {
+          pop_back(&stack, &pr, &b);
+          notation[jdx] = b;
+          ++jdx;
         }
         status = OK;
       }
