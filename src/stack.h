@@ -15,6 +15,7 @@ void pop_back(node **patr, int *prior, char *b);
 void free_node(node *patr);
 void print_list(node *patr);
 void add_stack(node **stack, char data, int prior);
-int check_stach(node **stack);
+int check_stack(node **stack);
+void pop_prior(node **patr, int *prior);
 
 #endif  // SRC_STACK_H

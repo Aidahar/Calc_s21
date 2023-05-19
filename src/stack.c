@@ -65,6 +65,21 @@ void pop_back(node **patr, int *prior, char *b) {
   }
 }
 
+void pop_prior(node **patr, int *prior) {
+  if (NULL != *patr) {
+    node *tmp = *patr;
+    if (tmp->next == NULL) {
+      *prior = tmp->prior;
+    } else {
+      while (tmp->next != NULL) {
+        tmp = tmp->next;
+      }
+      *prior = tmp->prior;
+    }
+    // free(tmp);
+  }
+}
+
 void free_node(node *patr) {
   node *curent = patr;
   while (NULL != curent) {
@@ -90,7 +105,7 @@ void add_stack(node **stack, char data, int prior) {
   }
 }
 
-int check_stach(node **stack) {
+int check_stack(node **stack) {
   int status = ERR;
   if (NULL == *stack) {
     status = OK;
