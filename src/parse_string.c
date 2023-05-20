@@ -1,9 +1,7 @@
 #include "parse_string.h"
 
-// #include <stdio.h>
-
 int main(void) {
-  char *data = "98/89-8";
+  char data[256] = "(5+5)^6";
   char *notation = (char *)calloc(sizeof(char), len_data(data) * 2);
   int status = parse_string(data, notation);
   printf("data = %s\n", data);
@@ -14,29 +12,23 @@ int main(void) {
 }
 
 int parse_string(char *data, char *notation) {
-  node *stack = NULL;
+  struct Node *stack = NULL;
   int status = ERR;
   if (data) {
-    int jdx, idx, pr;
-    char b, *p;
-    for (p = data, jdx = 0; *p; ++idx, ++p) {
-      if (is_digit(*p)) {
-        char *tmp = calloc(sizeof(char), len_data(p));
-        tmp = p;
-        int cnt = 0;
-        while (is_digit(*tmp)) {
-          notation[jdx] = *tmp;
-          ++jdx;
-          ++tmp;
-          ++cnt;
-        }
-        notation[jdx] = ' ';
+    int jdx, idx, pr, i;
+    int len = len_data(data);
+    char b;
+    // char *p;
+    for (i= 0, jdx = 0; i < len; ++idx, ++i) {
+      if (is_digit(data[i]) || data[i] == '.') {
+        notation[jdx] = data[i];
+        notation[++jdx] = ' ';
         ++jdx;
         status = OK;
-      } else if ('(' == *p) {
-        add_stack(&stack, *p, BR);
+      } else if ('(' == data[i]) {
+        add_stack(&stack, data[i], BR);
         status = OK;
-      } else if ('+' == *p || '-' == *p) {
+      } else if ('+' == data[i] || '-' == data[i]) {
         if (stack) {
           pop_prior(&stack, &pr);
           if (pr >= P_M) {
@@ -45,9 +37,9 @@ int parse_string(char *data, char *notation) {
             ++jdx;
           }
         }
-        add_stack(&stack, *p, P_M);
+        add_stack(&stack, data[i], P_M);
         status = OK;
-      } else if ('*' == *p || '/' == *p || '%' == *p) {
+      } else if ('*' == data[i] || '/' == data[i] || '%' == data[i]) {
         if (stack) {
           pop_prior(&stack, &pr);
           if (pr >= M_D) {
@@ -56,25 +48,25 @@ int parse_string(char *data, char *notation) {
             ++jdx;
           }
         }
-        add_stack(&stack, *p, M_D);
+        add_stack(&stack, data[i], M_D);
         status = OK;
-      } else if ('^' == *p) {
+      } else if ('^' == data[i]) {
         if (stack) {
           if (stack->prior) {
           }
         }
-        add_stack(&stack, *p, POW);
+        add_stack(&stack, data[i], POW);
         status = OK;
-      } else if ('s' == *p || 'c' == *p || 'a' == *p || 't' == *p ||
-                 'l' == *p) {
-        if (is_func(p, &stack, &idx)) {
-          for (; 1 < idx; --idx, ++p) {
+      } else if ('s' == data[i] || 'c' == data[i] || 'a' == data[i] || 't' == data[i] ||
+                 'l' == data[i]) {
+        if (is_func(data, &stack, &idx)) {
+          for (; 1 < idx; --idx, ++data) {
           }
           status = OK;
         } else {
           status = ERR;
         }
-      } else if (')' == *p) {
+      } else if (')' == data[i]) {
         pop_back(&stack, &pr, &b);
         if (b != '(') {
           notation[jdx] = b;

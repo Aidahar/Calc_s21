@@ -21,6 +21,8 @@
 //   return 0;
 // }
 
+
+
 int create_node(node **patr, int prior, char b) {
   int status = OK;
   node *tmp = (node *)malloc(sizeof(node));
@@ -37,12 +39,19 @@ int create_node(node **patr, int prior, char b) {
 
 void push_back(node *patr, int prior, char b) {
   node *new = NULL;
-  create_node(&new, prior, b);
-  node *cur = patr;
-  while (NULL != cur->next) {
-    cur = cur->next;
+  new = (node *)malloc(sizeof(node)* 1);
+  new->prior = prior;
+  new->symb = b;
+  new->next = NULL;
+  if (NULL == patr) {
+    patr = new;
+  } else {
+    node *cur = patr;
+    while (NULL != cur->next) {
+      cur = cur->next;
+    }
+    cur->next = new;
   }
-  cur->next = new;
 }
 
 void pop_back(node **patr, int *prior, char *b) {
@@ -76,7 +85,6 @@ void pop_prior(node **patr, int *prior) {
       }
       *prior = tmp->prior;
     }
-    // free(tmp);
   }
 }
 
@@ -97,11 +105,20 @@ void print_list(node *patr) {
   }
 }
 
-void add_stack(node **stack, char data, int prior) {
-  if (*stack) {
-    push_back(*stack, prior, data);
+void add_stack(node **stack, char b, int prior) {
+  node *new;
+  new = (node*)malloc(sizeof(node));
+  new->prior = prior;
+  new->symb = b;
+  new->next = NULL;
+  if (NULL == *stack) {
+    *stack = new;
   } else {
-    create_node(stack, prior, data);
+    node *cur = *stack;
+    while (NULL != cur->next) {
+      cur = cur->next;
+    }
+    cur->next = new;
   }
 }
 
