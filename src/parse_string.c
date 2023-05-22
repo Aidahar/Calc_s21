@@ -1,7 +1,7 @@
 #include "parse_string.h"
 
 int main(void) {
-  char data[256] = "(5+5)^6";
+  char data[256] = "sin(5)^6";
   char *notation = calloc(sizeof(char), len_data(data) * 2);
   int status = parse_string(data, notation);
   printf("data = %s\n", data);
@@ -29,7 +29,7 @@ int parse_string(char *data, char *notation) {
         status = OK;
       } else if ('+' == *p || '-' == *p) {
         if (stack) {
-          pop_prior(&stack, &pr);
+          pop_prior(stack, &pr);
           if (pr >= P_M) {
             pop_back(&stack, &pr, &b);
             notation[jdx] = b;
@@ -40,7 +40,7 @@ int parse_string(char *data, char *notation) {
         status = OK;
       } else if ('*' == *p || '/' == *p || '%' == *p) {
         if (stack) {
-          pop_prior(&stack, &pr);
+          pop_prior(stack, &pr);
           if (pr >= M_D) {
             pop_back(&stack, &pr, &b);
             notation[jdx] = b;
@@ -87,7 +87,7 @@ int parse_string(char *data, char *notation) {
       }
       idx = 0;
     }
-    while (!check_stack(&stack)) {
+    while (!check_stack(stack)) {
       pop_back(&stack, &pr, &b);
       notation[jdx] = b;
       ++jdx;

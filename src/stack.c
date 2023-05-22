@@ -1,26 +1,27 @@
 #include "stack.h"
 
-int main(void) {
-  int prior;
-  char sym;
-  node *test = NULL;
-  create_node(&test, P_M, '+');
-  push_back(&test, BR, '(');
-  push_back(&test, BR, ')');
-  push_back(&test, M_D, '*');
-  printf("all stack\n");
-  print_list(test);
-  printf("pop symbols\n");
-  pop_back(&test, &prior, &sym);
-  printf("prior = %d, symbol = %c\n", prior, sym);
-  pop_back(&test, &prior, &sym);
-  printf("prior = %d, symbol = %c\n", prior, sym);
-  printf("print stack again\n");
-  print_list(test);
-  free_node(&test);
-  return 0;
-}
+// int main(void) {
+//   int prior;
+//   char sym;
+//   node *test = NULL;
+//   create_node(&test, P_M, '+');
+//   push_back(&test, BR, '(');
+//   push_back(&test, BR, ')');
+//   push_back(&test, M_D, '*');
+//   printf("all stack\n");
+//   print_list(test);
+//   printf("pop symbols\n");
+//   pop_back(&test, &prior, &sym);
+//   printf("prior = %d, symbol = %c\n", prior, sym);
+//   pop_back(&test, &prior, &sym);
+//   printf("prior = %d, symbol = %c\n", prior, sym);
+//   printf("print stack again\n");
+//   print_list(test);
+//   free_node(&test);
+//   return 0;
+// }
 
+/*  */
 int create_node(node **patr, int prior, char b) {
   int status = OK;
   node *tmp = NULL;
@@ -34,6 +35,14 @@ int create_node(node **patr, int prior, char b) {
     (*patr) = tmp;
   }
   return status;
+}
+
+void add_stack(node **stack, char b, int prior) {
+  if (NULL == *stack) {
+    create_node(*&stack, prior, b);
+  } else {
+    push_back(*&stack, prior, b);
+  }
 }
 
 void push_back(node **patr, int prior, char b) {
@@ -73,9 +82,9 @@ void pop_back(node **patr, int *prior, char *b) {
   }
 }
 
-void pop_prior(node **patr, int *prior) {
-  if (NULL != *patr) {
-    node *tmp = *patr;
+void pop_prior(const node *patr, int *prior) {
+  if (NULL != patr) {
+    const node *tmp = patr;
     if (tmp->next == NULL) {
       *prior = tmp->prior;
     } else {
@@ -84,17 +93,7 @@ void pop_prior(node **patr, int *prior) {
       }
       *prior = tmp->prior;
     }
-    // free(tmp);
   }
-}
-
-void free_node(node **patr) {
-  while (*patr) {
-    node *curent = (*patr)->next;
-    free(*patr);
-    *patr = curent;
-  }
-  *patr = NULL;
 }
 
 void print_list(node *patr) {
@@ -105,31 +104,18 @@ void print_list(node *patr) {
   }
 }
 
-void add_stack(node **stack, char b, int prior) {
-  if (NULL == *stack) {
-    create_node(*&stack, prior, b);
-  } else {
-    push_back(*&stack, prior, b);
-  }
-  // node *new = malloc(sizeof(new));
-  // new->prior = prior;
-  // new->symb = b;
-  // new->next = NULL;
-  // if (NULL == *stack) {
-  //   *stack = new;
-  // } else {
-  //   node *cur = *stack;
-  //   while (NULL != cur->next) {
-  //     cur = cur->next;
-  //   }
-  //   cur->next = new;
-  // }
-}
-
-int check_stack(node **stack) {
+int check_stack(const node *stack) {
   int status = ERR;
-  if (NULL == *stack) {
+  if (NULL == stack) {
     status = OK;
   }
   return status;
+}
+
+void free_node(node **patr) {
+  while (*patr) {
+    node *curent = (*patr)->next;
+    free(*patr);
+    *patr = curent;
+  }
 }
