@@ -6,7 +6,7 @@ report/
 *.gcno
 *.info
 a.out
-test
+test.txt
 .gdb_history
 
 # Object files

@@ -1,10 +1,8 @@
 #include "parse_string.h"
 
-// #include <stdio.h>
-
 int main(void) {
-  char *data = "9/8-7";
-  char *notation = (char *)calloc(sizeof(char), len_data(data) * 2);
+  char data[256] = "(5+5)^6";
+  char *notation = calloc(sizeof(char), len_data(data) * 2);
   int status = parse_string(data, notation);
   printf("data = %s\n", data);
   printf("status = %d\n", status);
@@ -14,23 +12,16 @@ int main(void) {
 }
 
 int parse_string(char *data, char *notation) {
-  node *stack = NULL;
   int status = ERR;
   if (data) {
+    struct Node *stack;
     int jdx, idx, pr;
-    char b, *p;
+    char b;
+    char *p;
     for (p = data, jdx = 0; *p; ++idx, ++p) {
-      if (is_digit(*p)) {
-        char *tmp = calloc(sizeof(char), len_data(p));
-        tmp = p;
-        int cnt = 0;
-        while (is_digit(*tmp)) {
-          notation[jdx] = *tmp;
-          ++jdx;
-          ++tmp;
-          ++cnt;
-        }
-        notation[jdx] = ' ';
+      if (is_digit(*p) || *p == '.') {
+        notation[jdx] = *p;
+        notation[++jdx] = ' ';
         ++jdx;
         free(tmp);
         status = OK;
@@ -102,8 +93,8 @@ int parse_string(char *data, char *notation) {
       notation[jdx] = b;
       ++jdx;
     }
+    print_list(stack);
+    free_node(&stack);
   }
-  print_list(stack);
-  free_node(stack);
   return status;
 }
