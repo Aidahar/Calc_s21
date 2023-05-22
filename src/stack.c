@@ -46,11 +46,8 @@ void add_stack(node **stack, char b, int prior) {
 }
 
 void push_back(node **patr, int prior, char b) {
-  node *new = NULL;
-  new = malloc(sizeof(node));
-  new->prior = prior;
-  new->symb = b;
-  new->next = NULL;
+  node *new;
+  create_node(&new, prior, b);
   if (NULL == *patr) {
     *patr = new;
   } else {
@@ -62,22 +59,21 @@ void push_back(node **patr, int prior, char b) {
   }
 }
 
-void pop_back(node **patr, int *prior, char *b) {
+void pop_back(node **patr, int *prior, char *symb) {
   if (NULL != *patr) {
-    if ((*patr)->next == NULL) {
+    if (NULL == (*patr)->next) {
       *prior = (*patr)->prior;
-      *b = (*patr)->symb;
-      free_node(patr);
+      *symb = (*patr)->symb;
+      *patr = NULL;
     } else {
-      node *end = *patr;
-      while (NULL != end->next->next) {
-        end = end->next;
+      node *last = (*patr);
+      while (NULL != last->next->next) {
+        last = last->next;
       }
-      *prior = end->next->prior;
-      *b = end->next->symb;
-      node *del = end->next;
-      end->next = NULL;
-      free(del);
+      *prior = last->next->prior;
+      *symb = last->next->symb;
+      free(last->next);
+      last->next = NULL;
     }
   }
 }

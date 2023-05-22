@@ -1,7 +1,7 @@
 #include "parse_string.h"
 
 int main(void) {
-  char data[256] = "sin(5)^6";
+  char data[256] = "sin(5+2)^6";
   char *notation = calloc(sizeof(char), len_data(data) * 2);
   int status = parse_string(data, notation);
   printf("data = %s\n", data);
@@ -14,7 +14,7 @@ int main(void) {
 int parse_string(char *data, char *notation) {
   int status = ERR;
   if (data) {
-    struct Node *stack;
+    struct Node *stack = NULL;
     int jdx, idx, pr;
     char b;
     char *p;
@@ -51,7 +51,11 @@ int parse_string(char *data, char *notation) {
         status = OK;
       } else if ('^' == *p) {
         if (stack) {
-          if (stack->prior) {
+          pop_prior(stack, &pr);
+          if (pr >= POW) {
+            pop_back(&stack, &pr, &b);
+            notation[jdx] = b;
+            ++jdx;
           }
         }
         add_stack(&stack, *p, POW);
@@ -67,16 +71,21 @@ int parse_string(char *data, char *notation) {
         }
       } else if (')' == *p) {
         pop_back(&stack, &pr, &b);
-        if (b != '(') {
+        if ('(' != b) {
           notation[jdx] = b;
           ++jdx;
-        }
-        while ('(' != b) {
-          pop_back(&stack, &pr, &b);
-          if (b != '(') {
-            notation[jdx] = b;
-            ++jdx;
+          if ('(' == b) {
+            pop_back(&stack, &pr, &b);
           }
+          while ('(' != b) {
+            pop_back(&stack, &pr, &b);
+            if (b != '(') {
+              notation[jdx] = b;
+              ++jdx;
+            }
+          }
+        } else if ('(' == b) {
+          pop_back(&stack, &pr, &b);
         }
         if (pr == 1) {
           pop_back(&stack, &pr, &b);
