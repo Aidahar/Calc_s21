@@ -1,7 +1,7 @@
 GCC=gcc -Wall -Wextra -Werror -std=c11
 FILES=s21_helper.c parse_string.c stack.c
 RELEASE= -O3
-DEBUG= -g -O0 -fsanitize=address
+DEBUG= -ggdb3 -O0 #-fsanitize=address -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow
 CPPCHECK=cppcheck --enable=style,warning,performance,portability -q *.c
 
 all: debug

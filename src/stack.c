@@ -4,28 +4,27 @@
 //   int prior;
 //   char sym;
 //   node *test = NULL;
-//   create_node(&test, low, '+');
-//   push_back(test, high, '(');
-//   push_back(test, high, ')');
-//   push_back(test, mid, '*');
+//   create_node(&test, P_M, '+');
+//   // push_back(test, BR, '(');
+//   // push_back(test, BR, ')');
+//   // push_back(test, M_D, '*');
 //   printf("all stack\n");
 //   print_list(test);
 //   printf("pop symbols\n");
-//   pop_back(test, &prior, &sym);
-//   printf("prior = %d, symbol = %c\n", prior, sym);
-//   pop_back(test, &prior, &sym);
-//   printf("prior = %d, symbol = %c\n", prior, sym);
+//   pop_back(&test, &prior, &sym);
+//   // printf("prior = %d, symbol = %c\n", prior, sym);
+//   // pop_back(test, &prior, &sym);
+//   // printf("prior = %d, symbol = %c\n", prior, sym);
 //   printf("print stack again\n");
 //   print_list(test);
-//   free_node(test);
+//   free_node(&test);
 //   return 0;
 // }
 
-
-
 int create_node(node **patr, int prior, char b) {
   int status = OK;
-  node *tmp = (node *)malloc(sizeof(node));
+  node *tmp = NULL;
+  tmp = malloc(sizeof(node));
   if (NULL == tmp) {
     status = ERR;
   } else {
@@ -37,16 +36,16 @@ int create_node(node **patr, int prior, char b) {
   return status;
 }
 
-void push_back(node *patr, int prior, char b) {
+void push_back(node **patr, int prior, char b) {
   node *new = NULL;
-  new = (node *)malloc(sizeof(node)* 1);
+  new = malloc(sizeof(node));
   new->prior = prior;
   new->symb = b;
   new->next = NULL;
-  if (NULL == patr) {
-    patr = new;
+  if (NULL == *patr) {
+    *patr = new;
   } else {
-    node *cur = patr;
+    node *cur = *patr;
     while (NULL != cur->next) {
       cur = cur->next;
     }
@@ -59,7 +58,7 @@ void pop_back(node **patr, int *prior, char *b) {
     if ((*patr)->next == NULL) {
       *prior = (*patr)->prior;
       *b = (*patr)->symb;
-      (*patr) = NULL;
+      free_node(patr);
     } else {
       node *end = *patr;
       while (NULL != end->next->next) {
@@ -88,13 +87,13 @@ void pop_prior(node **patr, int *prior) {
   }
 }
 
-void free_node(node *patr) {
-  node *curent = patr;
-  while (NULL != curent) {
-    curent = patr->next;
-    free(patr);
-    patr = curent;
+void free_node(node **patr) {
+  while (*patr) {
+    node *curent = (*patr)->next;
+    free(*patr);
+    *patr = curent;
   }
+  *patr= NULL;
 }
 
 void print_list(node *patr) {
@@ -106,20 +105,24 @@ void print_list(node *patr) {
 }
 
 void add_stack(node **stack, char b, int prior) {
-  node *new;
-  new = (node*)malloc(sizeof(node));
-  new->prior = prior;
-  new->symb = b;
-  new->next = NULL;
   if (NULL == *stack) {
-    *stack = new;
+    create_node(*&stack, prior, b);
   } else {
-    node *cur = *stack;
-    while (NULL != cur->next) {
-      cur = cur->next;
-    }
-    cur->next = new;
+    push_back(*&stack, prior, b);
   }
+  // node *new = malloc(sizeof(new));
+  // new->prior = prior;
+  // new->symb = b;
+  // new->next = NULL;
+  // if (NULL == *stack) {
+  //   *stack = new;
+  // } else {
+  //   node *cur = *stack;
+  //   while (NULL != cur->next) {
+  //     cur = cur->next;
+  //   }
+  //   cur->next = new;
+  // }
 }
 
 int check_stack(node **stack) {
