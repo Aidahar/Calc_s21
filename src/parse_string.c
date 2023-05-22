@@ -8,6 +8,7 @@ int main(void) {
   printf("status = %d\n", status);
   print_notion(notation);
   free(notation);
+  notation = NULL;
   return 0;
 }
 
