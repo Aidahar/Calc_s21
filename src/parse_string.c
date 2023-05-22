@@ -1,7 +1,7 @@
 #include "parse_string.h"
 
 int main(void) {
-  char data[256] = "sin(5+2)^6";
+  char data[256] = "(5+2)^6";
   char *notation = calloc(sizeof(char), len_data(data) * 2);
   int status = parse_string(data, notation);
   printf("data = %s\n", data);
