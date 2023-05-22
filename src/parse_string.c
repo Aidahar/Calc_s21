@@ -3,7 +3,7 @@
 // #include <stdio.h>
 
 int main(void) {
-  char *data = "98/89-8";
+  char *data = "9/8-7";
   char *notation = (char *)calloc(sizeof(char), len_data(data) * 2);
   int status = parse_string(data, notation);
   printf("data = %s\n", data);
@@ -32,6 +32,7 @@ int parse_string(char *data, char *notation) {
         }
         notation[jdx] = ' ';
         ++jdx;
+        free(tmp);
         status = OK;
       } else if ('(' == *p) {
         add_stack(&stack, *p, BR);

@@ -1,3 +1,4 @@
+CLANG=clang -Wall -Wextra -Werror -std=c11
 GCC=gcc -Wall -Wextra -Werror -std=c11
 FILES=s21_helper.c parse_string.c stack.c
 RELEASE= -O3
