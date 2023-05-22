@@ -1,25 +1,25 @@
 #include "stack.h"
 
-// int main(void) {
-//   int prior;
-//   char sym;
-//   node *test = NULL;
-//   create_node(&test, P_M, '+');
-//   // push_back(test, BR, '(');
-//   // push_back(test, BR, ')');
-//   // push_back(test, M_D, '*');
-//   printf("all stack\n");
-//   print_list(test);
-//   printf("pop symbols\n");
-//   pop_back(&test, &prior, &sym);
-//   // printf("prior = %d, symbol = %c\n", prior, sym);
-//   // pop_back(test, &prior, &sym);
-//   // printf("prior = %d, symbol = %c\n", prior, sym);
-//   printf("print stack again\n");
-//   print_list(test);
-//   free_node(&test);
-//   return 0;
-// }
+int main(void) {
+  int prior;
+  char sym;
+  node *test = NULL;
+  create_node(&test, P_M, '+');
+  push_back(&test, BR, '(');
+  push_back(&test, BR, ')');
+  push_back(&test, M_D, '*');
+  printf("all stack\n");
+  print_list(test);
+  printf("pop symbols\n");
+  pop_back(&test, &prior, &sym);
+  printf("prior = %d, symbol = %c\n", prior, sym);
+  pop_back(&test, &prior, &sym);
+  printf("prior = %d, symbol = %c\n", prior, sym);
+  printf("print stack again\n");
+  print_list(test);
+  free_node(&test);
+  return 0;
+}
 
 int create_node(node **patr, int prior, char b) {
   int status = OK;

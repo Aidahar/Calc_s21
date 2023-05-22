@@ -23,7 +23,6 @@ int parse_string(char *data, char *notation) {
         notation[jdx] = *p;
         notation[++jdx] = ' ';
         ++jdx;
-        free(tmp);
         status = OK;
       } else if ('(' == *p) {
         add_stack(&stack, *p, BR);
