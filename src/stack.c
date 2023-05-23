@@ -25,56 +25,37 @@
 // }
 
 /*
-  @brief Функция создания связного списка возвращающая статус создания
+  @brief Функция создания элемента связного списка возвращающая статус создания
   @param patr сама структура
   @param prior приоритет передаваемого символа
   @param symb передаваемый символ
   @param status статус выполнения
 */
-int create_node(node **patr, int prior, char symb) {
+int push_back(node **patr, int prior, char symb) {
   int status = OK;
-  /* @param одна ячейка связного списка*/
-  node *new = (node *)malloc(sizeof(node)), *ptr;
-  new->prior = prior;
-  new->symb = symb;
-  new->next = NULL;
+  node *new = (node *)malloc(sizeof(node));
   if (NULL == new) {
     status = ERR;
   } else {
+    new->prior = prior;
+    new->symb = symb;
     if (NULL == (*patr)) {
+      new->next = NULL;
       (*patr) = new;
     } else {
-      ptr = (*patr);
-      while(NULL != ptr->next) {
-        ptr = ptr->next;
-      }
-      ptr->next = new;
+      new->next = (*patr);
+      (*patr) = new;
     }
   }
   return status;
 }
 
-void add_stack(node **stack, char b, int prior) {
-  // if (NULL == *stack) {
-    // create_node(*&stack, prior, b);
-  // } else {
-    push_back(*&stack, prior, b);
-  // }
-}
-
-void push_back(node **patr, int prior, char symb) {
-  node *new = (node*)malloc(sizeof(node));
-  new->prior = prior;
-  new->symb = symb;
-  if (NULL == (*patr)) {
-    new->next = NULL;
-    (*patr) = new;
-  } else {
-    new->next = (*patr);
-    (*patr) = new;
-  }
-}
-
+/*
+  @brief Функция взятия верхнего элемента связного списка
+  @param patr структура
+  @param prior приоритет символа
+  @param symb символ
+*/
 void pop_back(node **patr, int *prior, char *symb) {
   node *cur;
   cur = (*patr);
@@ -86,20 +67,21 @@ void pop_back(node **patr, int *prior, char *symb) {
   }
 }
 
+/*
+  @brief Функция проверки приоритета символа
+  @param patr структура
+  @param prior приоритет символа
+*/
 void pop_prior(const node *patr, int *prior) {
   if (NULL != patr) {
-    const node *tmp = patr;
-    if (tmp->next == NULL) {
-      *prior = tmp->prior;
-    } else {
-      while (tmp->next != NULL) {
-        tmp = tmp->next;
-      }
-      *prior = tmp->prior;
-    }
+    *prior = patr->prior;
   }
 }
 
+/*
+  @brief Вспомогательная функция для просмотра стека
+  @param patr структура
+*/
 void print_list(node *patr) {
   while (NULL != patr) {
     printf("priority %d ", patr->prior);
@@ -116,6 +98,10 @@ int check_stack(const node *stack) {
   return status;
 }
 
+/*
+  @brief Функция для очистки памяти выделенной под стека
+  @param patr структура
+*/
 void free_node(node **patr) {
   while (*patr) {
     node *curent = (*patr)->next;
