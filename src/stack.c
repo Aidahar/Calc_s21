@@ -57,11 +57,11 @@ int push_back(node **patr, int prior, char symb) {
   @param symb символ
 */
 void pop_back(node **patr, int *prior, char *symb) {
-  node *cur;
-  cur = (*patr);
-  *prior = (*patr)->prior;
-  *symb = (*patr)->symb;
   if (NULL != (*patr)) {
+    node *cur;
+    cur = (*patr);
+    *prior = cur->prior;
+    *symb = cur->symb;
     (*patr) = (*patr)->next;
     free(cur);
   }
