@@ -1,31 +1,28 @@
 #include "stack.h"
 
-int main(void) {
-  int prior;
-  char sym;
-  node *test = NULL;
-  push_back(&test, P_M, '+');
-  pop_back(&test, &prior, &sym);
-  push_back(&test, P_M, '+');
-  pop_back(&test, &prior, &sym);
-  push_back(&test, P_M, '+');
-  pop_back(&test, &prior, &sym);
-  push_back(&test, BR, '(');
-  push_back(&test, BR, '(');
-  push_back(&test, BR, ')');
-  push_back(&test, M_D, '*');
-  printf("all stack\n");
-  print_list(test);
-  printf("pop symbols\n");
-  pop_back(&test, &prior, &sym);
-  printf("prior = %d, symbol = %c\n", prior, sym);
-  pop_back(&test, &prior, &sym);
-  printf("prior = %d, symbol = %c\n", prior, sym);
-  printf("print stack again\n");
-  print_list(test);
-  free_node(&test);
-  return 0;
-}
+// int main(void) {
+//   int prior;
+//   char sym;
+//   node *test = NULL;
+//   push_back(&test, P_M, '+');
+//   push_back(&test, P_M, '+');
+//   push_back(&test, BR, '(');
+//   push_back(&test, BR, '(');
+//   push_back(&test, BR, ')');
+//   push_back(&test, M_D, '*');
+//   push_back(&test, P_M, '-');
+//   printf("all stack\n");
+//   print_list(test);
+//   printf("pop symbols\n");
+//   pop_back(&test, &prior, &sym);
+//   printf("prior = %d, symbol = %c\n", prior, sym);
+//   pop_back(&test, &prior, &sym);
+//   printf("prior = %d, symbol = %c\n", prior, sym);
+//   printf("print stack again\n");
+//   print_list(test);
+//   free_node(&test);
+//   return 0;
+// }
 
 /*
   @brief Функция создания связного списка возвращающая статус создания
@@ -79,20 +76,13 @@ void push_back(node **patr, int prior, char symb) {
 }
 
 void pop_back(node **patr, int *prior, char *symb) {
-  if (NULL == (*patr)->next ) {
-    *prior = (*patr)->prior;
-    *symb = (*patr)->symb;
-    free_node(patr);
-  } else {
-    node *ptr = (*patr), *preptr;
-    while (NULL != ptr->next) {
-      preptr = ptr;
-      ptr = ptr->next;
-    }
-    *prior = ptr->prior;
-    *symb = ptr->symb;
-    preptr->next = NULL;
-    free_node(&preptr);
+  node *cur;
+  cur = (*patr);
+  *prior = (*patr)->prior;
+  *symb = (*patr)->symb;
+  if (NULL != (*patr)) {
+    (*patr) = (*patr)->next;
+    free(cur);
   }
 }
 
