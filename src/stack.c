@@ -1,80 +1,98 @@
 #include "stack.h"
 
-// int main(void) {
-//   int prior;
-//   char sym;
-//   node *test = NULL;
-//   create_node(&test, P_M, '+');
-//   push_back(&test, BR, '(');
-//   push_back(&test, BR, ')');
-//   push_back(&test, M_D, '*');
-//   printf("all stack\n");
-//   print_list(test);
-//   printf("pop symbols\n");
-//   pop_back(&test, &prior, &sym);
-//   printf("prior = %d, symbol = %c\n", prior, sym);
-//   pop_back(&test, &prior, &sym);
-//   printf("prior = %d, symbol = %c\n", prior, sym);
-//   printf("print stack again\n");
-//   print_list(test);
-//   free_node(&test);
-//   return 0;
-// }
+int main(void) {
+  int prior;
+  char sym;
+  node *test = NULL;
+  push_back(&test, P_M, '+');
+  pop_back(&test, &prior, &sym);
+  push_back(&test, P_M, '+');
+  pop_back(&test, &prior, &sym);
+  push_back(&test, P_M, '+');
+  pop_back(&test, &prior, &sym);
+  push_back(&test, BR, '(');
+  push_back(&test, BR, '(');
+  push_back(&test, BR, ')');
+  push_back(&test, M_D, '*');
+  printf("all stack\n");
+  print_list(test);
+  printf("pop symbols\n");
+  pop_back(&test, &prior, &sym);
+  printf("prior = %d, symbol = %c\n", prior, sym);
+  pop_back(&test, &prior, &sym);
+  printf("prior = %d, symbol = %c\n", prior, sym);
+  printf("print stack again\n");
+  print_list(test);
+  free_node(&test);
+  return 0;
+}
 
-/*  */
-int create_node(node **patr, int prior, char b) {
+/*
+  @brief Функция создания связного списка возвращающая статус создания
+  @param patr сама структура
+  @param prior приоритет передаваемого символа
+  @param symb передаваемый символ
+  @param status статус выполнения
+*/
+int create_node(node **patr, int prior, char symb) {
   int status = OK;
-  node *tmp = NULL;
-  tmp = malloc(sizeof(node));
-  if (NULL == tmp) {
+  /* @param одна ячейка связного списка*/
+  node *new = (node *)malloc(sizeof(node)), *ptr;
+  new->prior = prior;
+  new->symb = symb;
+  new->next = NULL;
+  if (NULL == new) {
     status = ERR;
   } else {
-    tmp->prior = prior;
-    tmp->symb = b;
-    tmp->next = NULL;
-    (*patr) = tmp;
+    if (NULL == (*patr)) {
+      (*patr) = new;
+    } else {
+      ptr = (*patr);
+      while(NULL != ptr->next) {
+        ptr = ptr->next;
+      }
+      ptr->next = new;
+    }
   }
   return status;
 }
 
 void add_stack(node **stack, char b, int prior) {
-  if (NULL == *stack) {
-    create_node(*&stack, prior, b);
-  } else {
+  // if (NULL == *stack) {
+    // create_node(*&stack, prior, b);
+  // } else {
     push_back(*&stack, prior, b);
-  }
+  // }
 }
 
-void push_back(node **patr, int prior, char b) {
-  node *new;
-  create_node(&new, prior, b);
-  if (NULL == *patr) {
-    *patr = new;
+void push_back(node **patr, int prior, char symb) {
+  node *new = (node*)malloc(sizeof(node));
+  new->prior = prior;
+  new->symb = symb;
+  if (NULL == (*patr)) {
+    new->next = NULL;
+    (*patr) = new;
   } else {
-    node *cur = *patr;
-    while (NULL != cur->next) {
-      cur = cur->next;
-    }
-    cur->next = new;
+    new->next = (*patr);
+    (*patr) = new;
   }
 }
 
 void pop_back(node **patr, int *prior, char *symb) {
-  if (NULL != *patr) {
-    if (NULL == (*patr)->next) {
-      *prior = (*patr)->prior;
-      *symb = (*patr)->symb;
-      *patr = NULL;
-    } else {
-      node *last = (*patr);
-      while (NULL != last->next->next) {
-        last = last->next;
-      }
-      *prior = last->next->prior;
-      *symb = last->next->symb;
-      free(last->next);
-      last->next = NULL;
+  if (NULL == (*patr)->next ) {
+    *prior = (*patr)->prior;
+    *symb = (*patr)->symb;
+    free_node(patr);
+  } else {
+    node *ptr = (*patr), *preptr;
+    while (NULL != ptr->next) {
+      preptr = ptr;
+      ptr = ptr->next;
     }
+    *prior = ptr->prior;
+    *symb = ptr->symb;
+    preptr->next = NULL;
+    free_node(&preptr);
   }
 }
 

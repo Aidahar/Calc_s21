@@ -9,10 +9,10 @@ all: debug
 
 release: ${FILES}
 	${CPPCHECK}
-	${GCC} ${RELEASE} ${FILES}
+	${gcc} ${RELEASE} ${FILES}
 
 debug: ${FILES}
-	${GCC} ${DEBUG} ${FILES} && ./a.out
+	${CLANG} ${DEBUG} ${FILES} && ./a.out
 
 valgrind: release
 	valgrind --tool=memcheck --tool=callgrind --trace-children=yes --track-fds=yes --track-origins=yes --leak-check=full --show-leak-kinds=all -s --log-file=test ./a.out && cat test | grep errors

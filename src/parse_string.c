@@ -75,17 +75,17 @@ int parse_string(char *data, char *notation) {
         if ('(' != b) {
           notation[jdx] = b;
           ++jdx;
-          if ('(' == b) {
-            pop_back(&stack, &pr, &b);
-          }
           while ('(' != b) {
             pop_back(&stack, &pr, &b);
             if (b != '(') {
               notation[jdx] = b;
               ++jdx;
+            } else if ('(' == b) {
+              pop_back(&stack, &pr, &b);
             }
           }
-        } else if ('(' == b) {
+        } 
+        if ('(' == b) {
           pop_back(&stack, &pr, &b);
         }
         if (pr == 1) {
