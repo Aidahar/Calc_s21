@@ -15,5 +15,6 @@ int is_digit(char data);
 int len_data(char *data);
 void print_notation(char *data);
 int is_func(char *data, struct Node **stack, int *idx);
+int check_brackets(const char *data);
 
 #endif  // SRC_S21_HELPER_H_

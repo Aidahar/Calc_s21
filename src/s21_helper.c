@@ -1,5 +1,9 @@
 #include "s21_helper.h"
 
+/*
+  @breef вспомогательная функция считающая длину строки
+  @params data строка
+*/
 int len_data(char *data) {
   const char *p;
   for (p = data; *p; ++p) {
@@ -7,6 +11,10 @@ int len_data(char *data) {
   return p - data;
 }
 
+/*
+  @breef вспомогательная функция проверки символа на число
+  @params data символ
+*/
 int is_digit(char data) {
   int status = ERR;
   if (48 <= data && data <= 57) {
@@ -14,7 +22,10 @@ int is_digit(char data) {
   }
   return status;
 }
-
+/*
+  @breef вспомогательная функция отображения польской нотации
+  @params data строка нотации
+*/
 void print_notation(char *data) {
   while (*data != '\0') {
     printf("%c", *data);
@@ -23,6 +34,14 @@ void print_notation(char *data) {
   printf("\n");
 }
 
+/*
+  @breef функция проверяет строку на тригонометрические функции и добавляетв
+  стек их символы
+  @params data входная строка
+  @params stack стек операторов
+  @idx переменная которая запоминает на сколько сдвинуть строку до следующего
+  символа
+*/
 int is_func(char *data, struct Node **stack, int *idx) {
   int status = OK, id;
   char *tmp = calloc(sizeof(char), 5);
@@ -67,4 +86,22 @@ int is_func(char *data, struct Node **stack, int *idx) {
     status = ERR;
   }
   return status;
+}
+
+/*
+  @breef функция проверяет парность скобок
+  @params data входная строка
+*/
+int check_brackets(const char *data) {
+  int cnt = 0, idx;
+  const char *p;
+  for (p = data; *p; ++p) {
+    if ('(' == *p) {
+      ++cnt;
+    }
+    if (')' == *p) {
+      --cnt;
+    }
+  }
+  return (cnt != 0) ? ERR : OK;
 }
