@@ -138,19 +138,23 @@ void pop_br(char *stack_br, int *top) {
 int check_numbers(const char *data, char *notation, int *jdx, int *idx) {
   int status = OK, cnt = 0;
   char sym = *data;
-  while (is_digit(sym) || '.' == sym) {
-    if (('.' == sym) && (2 > cnt)) {
-      ++cnt;
+  if ('.' == sym) {
+    status = ERR;
+  } else {
+    while (is_digit(sym) || '.' == sym) {
+      if (('.' == sym) && (2 > cnt)) {
+        ++cnt;
+      }
+      if (1 < cnt) {
+        status = ERR;
+        break;
+      }
+      notation[*jdx] = sym;
+      ++*jdx;
+      ++data;
+      sym = *data;
+      ++*idx;
     }
-    if (1 < cnt) {
-      status = ERR;
-      break;
-    }
-    notation[*jdx] = sym;
-    ++*jdx;
-    ++data;
-    sym = *data;
-    ++*idx;
   }
   return status;
 }
