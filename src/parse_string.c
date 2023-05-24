@@ -1,12 +1,16 @@
 #include "parse_string.h"
 
 int main(void) {
-  char data[256] = "sqrt(2*2 + sin(1))-1/2*sin(2^2-2)";
+  char data[256] = "(222*2 + 1.2)-1/2*(2^2-2)";
   if (check_brackets(data)) {
     char *notation = calloc(sizeof(char), len_data(data) * 2);
-    parse_string(data, notation);
-    printf("data = %s\n", data);
-    print_notation(notation);
+    int status = parse_string(data, notation);
+    if (status == OK) {
+      printf("data = %s\n", data);
+      print_notation(notation);
+    } else {
+      printf("ERROR MOTHERFUCKER!\n");
+    }
     free(notation);
   }
   return 0;
@@ -21,10 +25,17 @@ int parse_string(char *data, char *notation) {
     char *p;
     for (p = data, jdx = 0; *p; ++idx, ++p) {
       if (is_digit(*p) || *p == '.') {
-        notation[jdx] = *p;
-        notation[++jdx] = ' ';
-        ++jdx;
-        status = OK;
+        int k = 0;
+        if (check_numbers(p, notation, &jdx, &k)) {
+          notation[jdx] = ' ';
+          ++jdx;
+          for (; 1 < k; --k, ++p) {
+          }
+          status = OK;
+        } else {
+          status = ERR;
+          break;
+        }
       } else if ('(' == *p) {
         push_back(&stack, BR, *p);
         status = OK;
@@ -95,13 +106,15 @@ int parse_string(char *data, char *notation) {
       }
       idx = 0;
     }
-    while (!check_stack(stack)) {
-      pop_back(&stack, &pr, &b);
-      notation[jdx] = b;
-      notation[++jdx] = ' ';
-      ++jdx;
+    if (status == OK) {
+      while (!check_stack(stack)) {
+        pop_back(&stack, &pr, &b);
+        notation[jdx] = b;
+        notation[++jdx] = ' ';
+        ++jdx;
+      }
     }
-    print_list(stack);
+    // print_list(stack);
     free_node(&stack);
   }
   return status;
