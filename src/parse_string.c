@@ -2,14 +2,14 @@
 
 int main(void) {
   char data[256] = "sin(2-cos(3+5))*(5+2)^6";
-  int check = check_brackets(data);
-  printf("CHECKING FUNCTION = %d\n", check);
-  // char *notation = calloc(sizeof(char), len_data(data) * 2);
-  // int status = parse_string(data, notation);
-  // printf("data = %s\n", data);
-  // printf("status = %d\n", status);
-  // print_notation(notation);
-  // free(notation);
+  if (check_brackets(data)) {
+    char *notation = calloc(sizeof(char), len_data(data) * 2);
+    int status = parse_string(data, notation);
+    printf("data = %s\n", data);
+    printf("status = %d\n", status);
+    print_notation(notation);
+    free(notation);
+  }
   return 0;
 }
 
