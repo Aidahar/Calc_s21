@@ -1,15 +1,14 @@
 #include "parse_string.h"
 
 int main(void) {
-  char data[256] = "sin(2-cos(3+5))*(5+2)^6";
-  int check = check_brackets(data);
-  printf("CHECKING FUNCTION = %d\n", check);
-  // char *notation = calloc(sizeof(char), len_data(data) * 2);
-  // int status = parse_string(data, notation);
-  // printf("data = %s\n", data);
-  // printf("status = %d\n", status);
-  // print_notation(notation);
-  // free(notation);
+  char data[256] = "sqrt(2*2 + sin(1))-1/2*sin(2^2-2)";
+  if (check_brackets(data)) {
+    char *notation = calloc(sizeof(char), len_data(data) * 2);
+    parse_string(data, notation);
+    printf("data = %s\n", data);
+    print_notation(notation);
+    free(notation);
+  }
   return 0;
 }
 
@@ -32,11 +31,12 @@ int parse_string(char *data, char *notation) {
       } else if ('+' == *p || '-' == *p) {
         if (stack) {
           pop_prior(stack, &pr);
-          if (pr >= P_M) {
+          while (pr >= P_M && !check_stack(stack)) {
             pop_back(&stack, &pr, &b);
             notation[jdx] = b;
             notation[++jdx] = ' ';
             ++jdx;
+            pop_prior(stack, &pr);
           }
         }
         push_back(&stack, P_M, *p);
@@ -44,11 +44,12 @@ int parse_string(char *data, char *notation) {
       } else if ('*' == *p || '/' == *p || '%' == *p) {
         if (stack) {
           pop_prior(stack, &pr);
-          if (pr >= M_D) {
+          while (pr >= M_D && !check_stack(stack)) {
             pop_back(&stack, &pr, &b);
             notation[jdx] = b;
             notation[++jdx] = ' ';
             ++jdx;
+            pop_prior(stack, &pr);
           }
         }
         push_back(&stack, M_D, *p);
@@ -56,11 +57,12 @@ int parse_string(char *data, char *notation) {
       } else if ('^' == *p) {
         if (stack) {
           pop_prior(stack, &pr);
-          if (pr >= POW) {
+          while (pr >= POW && !check_stack(stack)) {
             pop_back(&stack, &pr, &b);
             notation[jdx] = b;
             notation[++jdx] = ' ';
             ++jdx;
+            pop_prior(stack, &pr);
           }
         }
         push_back(&stack, POW, *p);
