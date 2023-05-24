@@ -4,7 +4,7 @@
   @breef вспомогательная функция считающая длину строки
   @params data строка
 */
-int len_data(char *data) {
+int len_data(const char *data) {
   const char *p;
   for (p = data; *p; ++p) {
   }
@@ -93,15 +93,45 @@ int is_func(char *data, struct Node **stack, int *idx) {
   @params data входная строка
 */
 int check_brackets(const char *data) {
-  int cnt = 0, idx;
-  const char *p;
-  for (p = data; *p; ++p) {
-    if ('(' == *p) {
-      ++cnt;
+  int status = OK;
+  int len = len_data(data);
+  char *stack_br = calloc(sizeof(char), len);
+  // потом переписать на проверку памяти
+  if (NULL == stack_br) {
+    status = ERR;
+  } else {
+    int top = -1;
+    const char *p;
+    for (p = data; *p; ++p) {
+      if ('(' == *p) {
+        push_br(stack_br, *p, &top);
+      } else if (')' == *p) {
+        if (-1 == top) {
+          status = ERR;
+          break;
+        } else if ('(' != stack_br[top]) {
+          status = ERR;
+          break;
+        } else {
+          pop_br(stack_br, &top);
+        }
+      }
     }
-    if (')' == *p) {
-      --cnt;
+    if (-1 != top) {
+      status = ERR;
     }
   }
-  return (cnt != 0) ? ERR : OK;
+  free(stack_br);
+  return status;
+}
+
+void push_br(char *stack_br, char br, int *top) {
+  ++*top;
+  stack_br[*top] = br;
+}
+void peek(const char *stack_br, char *br, int top) { *br = stack_br[top]; }
+
+void pop_br(char *stack_br, int *top) {
+  stack_br[*top] = '\0';
+  --(*top);
 }
