@@ -2,6 +2,7 @@
 
 int main(void) {
   char data[256] = "(2.222**/-*2.22 + 1.2)-1/2*(2^2-2)";
+  char data[256] = "(222*2 + 1.2)(12)-1/2*(2^2-2)";
   if (check_brackets(data)) {
     char *notation = calloc(sizeof(char), len_data(data) * 2);
     int status = parse_string(data, notation);
@@ -40,42 +41,15 @@ int parse_string(char *data, char *notation) {
         push_back(&stack, BR, *p);
         status = OK;
       } else if ('+' == *p || '-' == *p) {
-        if (stack) {
-          pop_prior(stack, &pr);
-          while (pr >= P_M && !check_stack(stack)) {
-            pop_back(&stack, &pr, &b);
-            notation[jdx] = b;
-            notation[++jdx] = ' ';
-            ++jdx;
-            pop_prior(stack, &pr);
-          }
-        }
+        add_stack(&stack, notation, &jdx, P_M);
         push_back(&stack, P_M, *p);
         status = OK;
       } else if ('*' == *p || '/' == *p || '%' == *p) {
-        if (stack) {
-          pop_prior(stack, &pr);
-          while (pr >= M_D && !check_stack(stack)) {
-            pop_back(&stack, &pr, &b);
-            notation[jdx] = b;
-            notation[++jdx] = ' ';
-            ++jdx;
-            pop_prior(stack, &pr);
-          }
-        }
+        add_stack(&stack, notation, &jdx, M_D);
         push_back(&stack, M_D, *p);
         status = OK;
       } else if ('^' == *p) {
-        if (stack) {
-          pop_prior(stack, &pr);
-          while (pr >= POW && !check_stack(stack)) {
-            pop_back(&stack, &pr, &b);
-            notation[jdx] = b;
-            notation[++jdx] = ' ';
-            ++jdx;
-            pop_prior(stack, &pr);
-          }
-        }
+        add_stack(&stack, notation, &jdx, POW);
         push_back(&stack, POW, *p);
         status = OK;
       } else if ('s' == *p || 'c' == *p || 'a' == *p || 't' == *p ||
@@ -90,17 +64,15 @@ int parse_string(char *data, char *notation) {
       } else if (')' == *p) {
         pop_back(&stack, &pr, &b);
         if ('(' != b) {
-          notation[jdx] = b;
-          notation[++jdx] = ' ';
-          ++jdx;
+          add_notation(notation, &jdx, b);
           while ('(' != b) {
             pop_back(&stack, &pr, &b);
             if (b != '(') {
-              notation[jdx] = b;
-              notation[++jdx] = ' ';
-              ++jdx;
+              add_notation(notation, &jdx, b);
             }
           }
+        } else if ('(' == b) {
+          status = ERR;
         }
         status = OK;
       }
@@ -109,12 +81,9 @@ int parse_string(char *data, char *notation) {
     if (status == OK) {
       while (!check_stack(stack)) {
         pop_back(&stack, &pr, &b);
-        notation[jdx] = b;
-        notation[++jdx] = ' ';
-        ++jdx;
+        add_notation(notation, &jdx, b);
       }
     }
-    // print_list(stack);
     free_node(&stack);
   }
   return status;
