@@ -44,9 +44,10 @@ int parse_string(char *data, char *notation) {
           pop_prior(stack, &pr);
           while (pr >= P_M && !check_stack(stack)) {
             pop_back(&stack, &pr, &b);
-            notation[jdx] = b;
-            notation[++jdx] = ' ';
-            ++jdx;
+            add_notation(notation, &jdx, b);
+            // notation[jdx] = b;
+            // notation[++jdx] = ' ';
+            // ++jdx;
             pop_prior(stack, &pr);
           }
         }
@@ -57,9 +58,10 @@ int parse_string(char *data, char *notation) {
           pop_prior(stack, &pr);
           while (pr >= M_D && !check_stack(stack)) {
             pop_back(&stack, &pr, &b);
-            notation[jdx] = b;
-            notation[++jdx] = ' ';
-            ++jdx;
+            add_notation(notation, &jdx, b);
+            // notation[jdx] = b;
+            // notation[++jdx] = ' ';
+            // ++jdx;
             pop_prior(stack, &pr);
           }
         }
@@ -70,9 +72,10 @@ int parse_string(char *data, char *notation) {
           pop_prior(stack, &pr);
           while (pr >= POW && !check_stack(stack)) {
             pop_back(&stack, &pr, &b);
-            notation[jdx] = b;
-            notation[++jdx] = ' ';
-            ++jdx;
+            add_notation(notation, &jdx, b);
+            // notation[jdx] = b;
+            // notation[++jdx] = ' ';
+            // ++jdx;
             pop_prior(stack, &pr);
           }
         }
@@ -90,15 +93,17 @@ int parse_string(char *data, char *notation) {
       } else if (')' == *p) {
         pop_back(&stack, &pr, &b);
         if ('(' != b) {
-          notation[jdx] = b;
-          notation[++jdx] = ' ';
-          ++jdx;
+          add_notation(notation, &jdx, b);
+          // notation[jdx] = b;
+          // notation[++jdx] = ' ';
+          // ++jdx;
           while ('(' != b) {
             pop_back(&stack, &pr, &b);
             if (b != '(') {
-              notation[jdx] = b;
-              notation[++jdx] = ' ';
-              ++jdx;
+              add_notation(notation, &jdx, b);
+              // notation[jdx] = b;
+              // notation[++jdx] = ' ';
+              // ++jdx;
             }
           }
         }
@@ -109,9 +114,10 @@ int parse_string(char *data, char *notation) {
     if (status == OK) {
       while (!check_stack(stack)) {
         pop_back(&stack, &pr, &b);
-        notation[jdx] = b;
-        notation[++jdx] = ' ';
-        ++jdx;
+        add_notation(notation, &jdx, b);
+        // notation[jdx] = b;
+        // notation[++jdx] = ' ';
+        // ++jdx;
       }
     }
     // print_list(stack);

@@ -158,3 +158,9 @@ int check_numbers(const char *data, char *notation, int *jdx, int *idx) {
   }
   return status;
 }
+
+void add_notation(char *notation, int *jdx, char sym) {
+  notation[(*jdx)] = sym;
+  notation[++(*jdx)] = ' ';
+  ++(*jdx);
+}
