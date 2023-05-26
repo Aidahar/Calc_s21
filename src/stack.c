@@ -109,3 +109,18 @@ void free_node(node **patr) {
     *patr = curent;
   }
 }
+
+void add_stack(node **patr, char *notation, int *jdx, int op) {
+  int pr;
+  char b;
+  if (patr) {
+    pop_prior(*patr, &pr);
+    while (pr >= op && !check_stack(*patr)) {
+      pop_back(&(*patr), &pr, &b);
+      add_notation(notation, &(*jdx), b);
+      pop_prior(*patr, &pr);
+    }
+  }
+}
+
+void add_oper_stack();

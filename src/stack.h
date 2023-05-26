@@ -15,5 +15,6 @@ void free_node(node **patr);
 void print_list(node *patr);
 int check_stack(const node *stack);
 void pop_prior(const node *patr, int *prior);
+void add_stack(node **patr, char *notation, int *jdx, int op);
 
 #endif  // SRC_STACK_H

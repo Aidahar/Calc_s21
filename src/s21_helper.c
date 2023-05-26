@@ -164,3 +164,15 @@ void add_notation(char *notation, int *jdx, char sym) {
   notation[++(*jdx)] = ' ';
   ++(*jdx);
 }
+
+int numbers(char *p, char *notation, int *jdx) {
+  int status = ERR, k = 0;
+  if (check_numbers(p, notation, &(*jdx), &k)) {
+    notation[(*jdx)] = ' ';
+    ++jdx;
+    for (; 1 < k; --k, ++p) {
+    }
+    status = OK;
+  }
+  return status;
+}
