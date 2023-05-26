@@ -96,7 +96,6 @@ int check_brackets(const char *data) {
   int status = OK;
   int len = len_data(data);
   char *stack_br = calloc(sizeof(char), len);
-  // потом переписать на проверку памяти
   if (NULL == stack_br) {
     status = ERR;
   } else {
@@ -134,4 +133,28 @@ void peek(const char *stack_br, char *br, int top) { *br = stack_br[top]; }
 void pop_br(char *stack_br, int *top) {
   stack_br[*top] = '\0';
   --(*top);
+}
+
+int check_numbers(const char *data, char *notation, int *jdx, int *idx) {
+  int status = OK, cnt = 0;
+  char sym = *data;
+  if ('.' == sym) {
+    status = ERR;
+  } else {
+    while (is_digit(sym) || '.' == sym) {
+      if (('.' == sym) && (2 > cnt)) {
+        ++cnt;
+      }
+      if (1 < cnt) {
+        status = ERR;
+        break;
+      }
+      notation[*jdx] = sym;
+      ++*jdx;
+      ++data;
+      sym = *data;
+      ++*idx;
+    }
+  }
+  return status;
 }

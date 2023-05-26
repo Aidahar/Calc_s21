@@ -1,13 +1,16 @@
 #include "parse_string.h"
 
 int main(void) {
-  char data[256] = "sin(2-cos(3+5))*(5+2)^6";
+  char data[256] = "(222*2 + 1.2)-1/2*(2^2-2)";
   if (check_brackets(data)) {
     char *notation = calloc(sizeof(char), len_data(data) * 2);
     int status = parse_string(data, notation);
-    printf("data = %s\n", data);
-    printf("status = %d\n", status);
-    print_notation(notation);
+    if (status == OK) {
+      printf("data = %s\n", data);
+      print_notation(notation);
+    } else {
+      printf("ERROR MOTHERFUCKER!\n");
+    }
     free(notation);
   }
   return 0;
@@ -22,21 +25,29 @@ int parse_string(char *data, char *notation) {
     char *p;
     for (p = data, jdx = 0; *p; ++idx, ++p) {
       if (is_digit(*p) || *p == '.') {
-        notation[jdx] = *p;
-        notation[++jdx] = ' ';
-        ++jdx;
-        status = OK;
+        int k = 0;
+        if (check_numbers(p, notation, &jdx, &k)) {
+          notation[jdx] = ' ';
+          ++jdx;
+          for (; 1 < k; --k, ++p) {
+          }
+          status = OK;
+        } else {
+          status = ERR;
+          break;
+        }
       } else if ('(' == *p) {
         push_back(&stack, BR, *p);
         status = OK;
       } else if ('+' == *p || '-' == *p) {
         if (stack) {
           pop_prior(stack, &pr);
-          if (pr >= P_M) {
+          while (pr >= P_M && !check_stack(stack)) {
             pop_back(&stack, &pr, &b);
             notation[jdx] = b;
             notation[++jdx] = ' ';
             ++jdx;
+            pop_prior(stack, &pr);
           }
         }
         push_back(&stack, P_M, *p);
@@ -44,11 +55,12 @@ int parse_string(char *data, char *notation) {
       } else if ('*' == *p || '/' == *p || '%' == *p) {
         if (stack) {
           pop_prior(stack, &pr);
-          if (pr >= M_D) {
+          while (pr >= M_D && !check_stack(stack)) {
             pop_back(&stack, &pr, &b);
             notation[jdx] = b;
             notation[++jdx] = ' ';
             ++jdx;
+            pop_prior(stack, &pr);
           }
         }
         push_back(&stack, M_D, *p);
@@ -56,11 +68,12 @@ int parse_string(char *data, char *notation) {
       } else if ('^' == *p) {
         if (stack) {
           pop_prior(stack, &pr);
-          if (pr >= POW) {
+          while (pr >= POW && !check_stack(stack)) {
             pop_back(&stack, &pr, &b);
             notation[jdx] = b;
             notation[++jdx] = ' ';
             ++jdx;
+            pop_prior(stack, &pr);
           }
         }
         push_back(&stack, POW, *p);
@@ -93,13 +106,15 @@ int parse_string(char *data, char *notation) {
       }
       idx = 0;
     }
-    while (!check_stack(stack)) {
-      pop_back(&stack, &pr, &b);
-      notation[jdx] = b;
-      notation[++jdx] = ' ';
-      ++jdx;
+    if (status == OK) {
+      while (!check_stack(stack)) {
+        pop_back(&stack, &pr, &b);
+        notation[jdx] = b;
+        notation[++jdx] = ' ';
+        ++jdx;
+      }
     }
-    print_list(stack);
+    // print_list(stack);
     free_node(&stack);
   }
   return status;

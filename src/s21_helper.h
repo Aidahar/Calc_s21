@@ -19,5 +19,6 @@ int check_brackets(const char *data);
 void pop_br(char *stack_br, int *top);
 void push_br(char *stack_br, char br, int *top);
 void peek(const char *stack_br, char *br, int top);
+int check_numbers(const char *data, char *notation, int *jdx, int *idx);
 
 #endif  // SRC_S21_HELPER_H_
