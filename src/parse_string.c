@@ -1,7 +1,6 @@
 #include "parse_string.h"
 
 int main(void) {
-  char data[256] = "(2.222**/-*2.22 + 1.2)-1/2*(2^2-2)";
   char data[256] = "(222*2 + 1.2)(12)-1/2*(2^2-2)";
   if (check_brackets(data)) {
     char *notation = calloc(sizeof(char), len_data(data) * 2);
