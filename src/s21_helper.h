@@ -23,5 +23,6 @@ int check_numbers(const char *data, char *notation, int *jdx, int *idx);
 void add_notation(char *notation, int *jdx, char sym);
 int numbers(char *p, char *notation, int *jdx, int *idx);
 int check_brakets(char *p);
+void add_stack_last(node **stack, char * notation, int *jdx, int *pr, char *b);
 
 #endif  //  SRC_S21_HELPER_H_

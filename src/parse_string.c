@@ -1,7 +1,7 @@
 #include "parse_string.h"
 
 int main(void) {
-  char data[256] = "((22.2*2)(12) + 1.2)-1/2*(2^2-2)";
+  char data[256] = "((22.2*2)*(12) + 1.2)-1/2*(2^2-2)";
   if (check_brackets(data)) {
     char *notation = calloc(sizeof(char), len_data(data) * 2);
     int status = parse_string(data, notation);
@@ -79,10 +79,7 @@ int parse_string(char *data, char *notation) {
       idx = 0;
     }
     if (status == OK) {
-      while (!check_stack(stack)) {
-        pop_back(&stack, &pr, &b);
-        add_notation(notation, &jdx, b);
-      }
+      add_stack_last(&stack, notation, &jdx, &pr, &b);
     }
     free_node(&stack);
   }

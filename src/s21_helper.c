@@ -175,7 +175,9 @@ int numbers(char *p, char *notation, int *jdx, int *idx) {
   return status;
 }
 
-// int parse_params();
+// int parse_params() {
+
+// }
 
 int check_brakets(char *p) {
   int status = OK, id;
@@ -188,4 +190,11 @@ int check_brakets(char *p) {
     status = ERR;
   }
   return status;
+}
+
+void add_stack_last(node **stack, char * notation, int *jdx, int *pr, char *b) {
+  while (!check_stack((*stack))) {
+    pop_back(&(*stack), &(*pr), &(*b));
+    add_notation(notation, &(*jdx), *b);
+  }
 }
