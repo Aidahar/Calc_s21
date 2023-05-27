@@ -150,10 +150,10 @@ int check_numbers(const char *data, char *notation, int *jdx, int *idx) {
         break;
       }
       notation[*jdx] = sym;
-      ++*jdx;
+      ++(*jdx);
       ++data;
       sym = *data;
-      ++*idx;
+      ++(*idx);
     }
   }
   return status;
@@ -165,14 +165,27 @@ void add_notation(char *notation, int *jdx, char sym) {
   ++(*jdx);
 }
 
-int numbers(char *p, char *notation, int *jdx) {
-  int status = ERR, k = 0;
-  if (check_numbers(p, notation, &(*jdx), &k)) {
+int numbers(char *p, char *notation, int *jdx, int *idx) {
+  int status = ERR;
+  if (check_numbers(p, notation, &(*jdx), &(*idx))) {
     notation[(*jdx)] = ' ';
-    ++jdx;
-    for (; 1 < k; --k, ++p) {
-    }
+    ++(*jdx);
     status = OK;
+  }
+  return status;
+}
+
+// int parse_params();
+
+int check_brakets(char *p) {
+  int status = OK, id;
+  char *tmp = calloc(sizeof(char), 3);
+  for (id = 0; id < 2; ++id, ++p) {
+    tmp[id] = *p;
+  }
+  tmp[3] = '\0';
+  if (strstr(tmp, ")(") != NULL) {
+    status = ERR;
   }
   return status;
 }

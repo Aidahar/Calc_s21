@@ -1,7 +1,7 @@
 #include "parse_string.h"
 
 int main(void) {
-  char data[256] = "(222*2 + 1.2)(12)-1/2*(2^2-2)";
+  char data[256] = "((22.2*2)(12) + 1.2)-1/2*(2^2-2)";
   if (check_brackets(data)) {
     char *notation = calloc(sizeof(char), len_data(data) * 2);
     int status = parse_string(data, notation);
@@ -23,18 +23,15 @@ int parse_string(char *data, char *notation) {
     int jdx, idx, pr;
     char b;
     char *p;
-    for (p = data, jdx = 0; *p; ++idx, ++p) {
+    for (p = data, jdx = 0; *p; ++idx, ++p) { 
       if (is_digit(*p) || *p == '.') {
         int k = 0;
-        if (check_numbers(p, notation, &jdx, &k)) {
-          notation[jdx] = ' ';
-          ++jdx;
-          for (; 1 < k; --k, ++p) {
-          }
-          status = OK;
-        } else {
+        if (!numbers(p, notation, &jdx, &k)) {
           status = ERR;
           break;
+        } else {
+          for (; 1 < k; --k, ++p) {
+          }
         }
       } else if ('(' == *p) {
         push_back(&stack, BR, *p);
@@ -61,6 +58,10 @@ int parse_string(char *data, char *notation) {
           status = ERR;
         }
       } else if (')' == *p) {
+        if (!check_brakets(p)){
+          status = ERR;
+          break;
+        }
         pop_back(&stack, &pr, &b);
         if ('(' != b) {
           add_notation(notation, &jdx, b);
