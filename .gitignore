@@ -8,6 +8,7 @@ report/
 a.out
 test.txt
 .gdb_history
+src/buid*
 
 # Object files
 *.o
