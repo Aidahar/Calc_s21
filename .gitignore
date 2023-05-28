@@ -8,7 +8,8 @@ report/
 a.out
 test.txt
 .gdb_history
-src/buid*
+src/build-Calc-Desktop-Debug/
+build*/
 
 # Object files
 *.o

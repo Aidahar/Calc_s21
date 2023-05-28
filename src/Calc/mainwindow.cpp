@@ -20,7 +20,12 @@ void MainWindow::on_pushButton_7_clicked()
 
     if ( button )
     {
-        ui->lineEdit->insert( button->text() );
+        if (ui->lineEdit->text().contains("ERROR!")) {
+            ui->lineEdit->clear();
+            ui->lineEdit->insert( button->text() );
+        } else {
+            ui->lineEdit->insert( button->text() );
+        }
     }
 }
 
@@ -30,7 +35,12 @@ void MainWindow::on_pushButton_8_clicked()
 
     if ( button )
     {
-        ui->lineEdit->insert( button->text() );
+        if (ui->lineEdit->text().contains("ERROR!")) {
+            ui->lineEdit->clear();
+            ui->lineEdit->insert( button->text() );
+        } else {
+            ui->lineEdit->insert( button->text() );
+        }
     }
 }
 
@@ -40,7 +50,12 @@ void MainWindow::on_pushButton_9_clicked()
 
     if ( button )
     {
-        ui->lineEdit->insert( button->text() );
+        if (ui->lineEdit->text().contains("ERROR!")) {
+            ui->lineEdit->clear();
+            ui->lineEdit->insert( button->text() );
+        } else {
+            ui->lineEdit->insert( button->text() );
+        }
     }
 }
 
@@ -51,7 +66,12 @@ void MainWindow::on_pushButton_10_clicked()
 
     if ( button )
     {
-        ui->lineEdit->insert( button->text() );
+        if (ui->lineEdit->text().contains("ERROR!")) {
+            ui->lineEdit->clear();
+            ui->lineEdit->insert( button->text() );
+        } else {
+            ui->lineEdit->insert( button->text() );
+        }
     }
 }
 
@@ -62,7 +82,12 @@ void MainWindow::on_pushButton_11_clicked()
 
     if ( button )
     {
-        ui->lineEdit->insert( button->text() );
+        if (ui->lineEdit->text().contains("ERROR!")) {
+            ui->lineEdit->clear();
+            ui->lineEdit->insert( button->text() );
+        } else {
+            ui->lineEdit->insert( button->text() );
+        }
     }
 }
 
@@ -72,7 +97,12 @@ void MainWindow::on_pushButton_12_clicked()
     QPushButton* button = qobject_cast<QPushButton*>( sender() );
     if ( button )
     {
-        ui->lineEdit->insert( button->text() );
+        if (ui->lineEdit->text().contains("ERROR!")) {
+            ui->lineEdit->clear();
+            ui->lineEdit->insert( button->text() );
+        } else {
+            ui->lineEdit->insert( button->text() );
+        }
     }
 }
 
@@ -82,7 +112,12 @@ void MainWindow::on_pushButton_13_clicked()
     QPushButton* button = qobject_cast<QPushButton*>( sender() );
     if ( button )
     {
-        ui->lineEdit->insert( button->text() );
+        if (ui->lineEdit->text().contains("ERROR!")) {
+            ui->lineEdit->clear();
+            ui->lineEdit->insert( button->text() );
+        } else {
+            ui->lineEdit->insert( button->text() );
+        }
     }
 }
 
@@ -92,7 +127,12 @@ void MainWindow::on_pushButton_14_clicked()
     QPushButton* button = qobject_cast<QPushButton*>( sender() );
     if ( button )
     {
-        ui->lineEdit->insert( button->text() );
+        if (ui->lineEdit->text().contains("ERROR!")) {
+            ui->lineEdit->clear();
+            ui->lineEdit->insert( button->text() );
+        } else {
+            ui->lineEdit->insert( button->text() );
+        }
     }
 }
 
@@ -102,7 +142,12 @@ void MainWindow::on_pushButton_15_clicked()
     QPushButton* button = qobject_cast<QPushButton*>( sender() );
     if ( button )
     {
-        ui->lineEdit->insert( button->text() );
+        if (ui->lineEdit->text().contains("ERROR!")) {
+            ui->lineEdit->clear();
+            ui->lineEdit->insert( button->text() );
+        } else {
+            ui->lineEdit->insert( button->text() );
+        }
     }
 }
 
@@ -112,7 +157,12 @@ void MainWindow::on_pushButton_16_clicked()
     QPushButton* button = qobject_cast<QPushButton*>( sender() );
     if ( button )
     {
-        ui->lineEdit->insert( button->text() );
+        if (ui->lineEdit->text().contains("ERROR!")) {
+            ui->lineEdit->clear();
+            ui->lineEdit->insert( button->text() );
+        } else {
+            ui->lineEdit->insert( button->text() );
+        }
     }
 }
 
@@ -122,7 +172,13 @@ void MainWindow::on_pushButton_17_clicked()
     QPushButton* button = qobject_cast<QPushButton*>( sender() );
     if ( button )
     {
-        ui->lineEdit->insert( button->text() );
+        if (ui->lineEdit->text().contains("ERROR!")) {
+            ui->lineEdit->clear();
+            ui->lineEdit->insert( button->text() );
+        } else {
+            ui->lineEdit->insert( button->text() );
+        }
+
     }
 }
 
@@ -134,6 +190,66 @@ void MainWindow::on_pushButton_18_clicked()
     {
         if (ui->lineEdit->text().contains('.')) {
             ui->lineEdit->setText("ERROR!");
+        } else {
+            ui->lineEdit->insert( button->text() );
+        }
+    }
+}
+
+
+void MainWindow::on_Del_clicked()
+{
+    QPushButton* button = qobject_cast<QPushButton*>( sender() );
+    if ( button )
+    {
+        if (ui->lineEdit->text().contains("ERROR!")) {
+            ui->lineEdit->clear();
+            ui->lineEdit->insert( button->text() );
+        } else {
+            ui->lineEdit->insert( button->text() );
+        }
+    }
+}
+
+
+void MainWindow::on_Mul_clicked()
+{
+    QPushButton* button = qobject_cast<QPushButton*>( sender() );
+    if ( button )
+    {
+        if (ui->lineEdit->text().contains("ERROR!")) {
+            ui->lineEdit->clear();
+            ui->lineEdit->insert( button->text() );
+        } else {
+            ui->lineEdit->insert( button->text() );
+        }
+    }
+}
+
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    QPushButton* button = qobject_cast<QPushButton*>( sender() );
+    if ( button )
+    {
+        if (ui->lineEdit->text().contains("ERROR!")) {
+            ui->lineEdit->clear();
+            ui->lineEdit->insert( button->text() );
+        } else {
+            ui->lineEdit->insert( button->text() );
+        }
+    }
+}
+
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    QPushButton* button = qobject_cast<QPushButton*>( sender() );
+    if ( button )
+    {
+        if (ui->lineEdit->text().contains("ERROR!")) {
+            ui->lineEdit->clear();
+            ui->lineEdit->insert( button->text() );
         } else {
             ui->lineEdit->insert( button->text() );
         }

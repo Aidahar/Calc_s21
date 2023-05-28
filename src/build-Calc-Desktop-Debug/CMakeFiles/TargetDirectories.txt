@@ -1,9 +1,0 @@
-/home/casper/s21_project/C7_SmartCalc_v1.0-1/src/build-Calc-Desktop-Debug/CMakeFiles/Calc.dir
-/home/casper/s21_project/C7_SmartCalc_v1.0-1/src/build-Calc-Desktop-Debug/CMakeFiles/edit_cache.dir
-/home/casper/s21_project/C7_SmartCalc_v1.0-1/src/build-Calc-Desktop-Debug/CMakeFiles/rebuild_cache.dir
-/home/casper/s21_project/C7_SmartCalc_v1.0-1/src/build-Calc-Desktop-Debug/CMakeFiles/list_install_components.dir
-/home/casper/s21_project/C7_SmartCalc_v1.0-1/src/build-Calc-Desktop-Debug/CMakeFiles/install.dir
-/home/casper/s21_project/C7_SmartCalc_v1.0-1/src/build-Calc-Desktop-Debug/CMakeFiles/install/local.dir
-/home/casper/s21_project/C7_SmartCalc_v1.0-1/src/build-Calc-Desktop-Debug/CMakeFiles/install/strip.dir
-/home/casper/s21_project/C7_SmartCalc_v1.0-1/src/build-Calc-Desktop-Debug/CMakeFiles/Calc_autogen_timestamp_deps.dir
-/home/casper/s21_project/C7_SmartCalc_v1.0-1/src/build-Calc-Desktop-Debug/CMakeFiles/Calc_autogen.dir
