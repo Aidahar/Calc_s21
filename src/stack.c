@@ -90,6 +90,10 @@ void print_list(node *patr) {
   }
 }
 
+/*
+  @brief Вспомогательная функция для проверки на существование стека
+  @param stack структура
+*/
 int check_stack(const node *stack) {
   int status = ERR;
   if (NULL == stack) {
@@ -110,6 +114,13 @@ void free_node(node **patr) {
   }
 }
 
+/*
+  @brief Функция для добавления оператора в стэк
+  @param patr структура
+  @notation notation строка нотации
+  @jdx индекс строки нотации
+  @op оператор
+*/
 void add_stack(node **patr, char *notation, int *jdx, int op) {
   int pr;
   char b;
