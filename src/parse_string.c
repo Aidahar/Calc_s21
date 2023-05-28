@@ -1,7 +1,7 @@
 #include "parse_string.h"
 
 int main(void) {
-  char data[256] = "((22.2*2)*(12) + 1.2)-1/2*(2^2-2)";
+  char data[256] = "(sin(22.2*2)*(12) + 1.2)-1/2*(2^2-2)";
   if (check_brackets(data)) {
     char *notation = calloc(sizeof(char), len_data(data) * 2);
     int status = parse_string(data, notation);
@@ -12,6 +12,8 @@ int main(void) {
       printf("ERROR MOTHERFUCKER!\n");
     }
     free(notation);
+  } else {
+    printf("ERRORS MOTHERFUCKER");
   }
   return 0;
 }
@@ -56,6 +58,7 @@ int parse_string(char *data, char *notation) {
           status = OK;
         } else {
           status = ERR;
+          break;
         }
       } else if (')' == *p) {
         if (!check_brakets(p)){
@@ -71,9 +74,7 @@ int parse_string(char *data, char *notation) {
               add_notation(notation, &jdx, b);
             }
           }
-        } else if ('(' == b) {
-          status = ERR;
-        }
+        } 
         status = OK;
       }
       idx = 0;
