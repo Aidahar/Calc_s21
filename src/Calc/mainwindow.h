@@ -16,35 +16,44 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_7_clicked();
-
-    void on_pushButton_8_clicked();
-
-    void on_pushButton_9_clicked();
-
-    void on_pushButton_10_clicked();
-
-    void on_pushButton_11_clicked();
-
-    void on_pushButton_12_clicked();
-
-    void on_pushButton_13_clicked();
-
-    void on_pushButton_14_clicked();
-
-    void on_pushButton_15_clicked();
-
-    void on_pushButton_16_clicked();
-
-    void on_pushButton_17_clicked();
-
-    void on_pushButton_18_clicked();
 
     void on_Del_clicked();
 
     void on_Mul_clicked();
 
-    void on_pushButton_3_clicked();
+    void on_button_tchk_clicked();
+
+    void on_Minus_clicked();
+
+    void on_plus_clicked();
+
+    void on_C_clicked();
+
+    void on_percent_clicked();
+
+    void on_AC_clicked();
+
+    void on_button_0_clicked();
+
+    void on_button_00_clicked();
+
+    void on_button_1_clicked();
+
+    void on_button_2_clicked();
+
+    void on_button_3_clicked();
+
+    void on_button_4_clicked();
+
+    void on_button_5_clicked();
+
+    void on_button_6_clicked();
+
+    void on_button_7_clicked();
+
+    void on_button_8_clicked();
+
+    void on_buton_9_clicked();
 
 private:
     Ui::MainWindow *ui;
