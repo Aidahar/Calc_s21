@@ -276,3 +276,78 @@ void MainWindow::on_buton_9_clicked()
     }
 }
 
+void MainWindow::on_Sqrt_clicked()
+{
+    QPushButton* button = qobject_cast<QPushButton*>( sender() );
+    if ( button )
+    {
+        if (ui->parsed_string->text().contains("ERROR!")) {
+            ui->parsed_string->clear();
+            ui->parsed_string->insert( "sqrt(" );
+        } else {
+            ui->parsed_string->insert( "sqrt(" );
+        }
+    }
+}
+
+
+void MainWindow::on_UnarPL_clicked()
+{
+    QPushButton* button = qobject_cast<QPushButton*>( sender() );
+    if ( button )
+    {
+        if (ui->parsed_string->text().contains("ERROR!")) {
+            ui->parsed_string->clear();
+            if (ui->parsed_string->text().endsWith("+")) {
+                ui->parsed_string->backspace();
+                ui->parsed_string->insert("-");
+            } else if (ui->parsed_string->text().endsWith("-")) {
+                ui->parsed_string->backspace();
+                ui->parsed_string->insert(button->text());
+            } else {
+                ui->parsed_string->insert( "+" );
+            }
+        } else {
+            if (ui->parsed_string->text().endsWith("+")) {
+                ui->parsed_string->backspace();
+                ui->parsed_string->insert("-");
+            } else if (ui->parsed_string->text().endsWith("-")) {
+                ui->parsed_string->backspace();
+                ui->parsed_string->insert(button->text());
+            } else {
+                ui->parsed_string->insert( "+" );
+            }
+        }
+    }
+}
+
+
+void MainWindow::on_L_BR_clicked()
+{
+    QPushButton* button = qobject_cast<QPushButton*>( sender() );
+    if ( button )
+    {
+        if (ui->parsed_string->text().contains("ERROR!")) {
+            ui->parsed_string->clear();
+            ui->parsed_string->insert(button->text());
+        } else {
+            ui->parsed_string->insert( button->text() );
+        }
+    }
+}
+
+
+void MainWindow::on_R_BR_clicked()
+{
+    QPushButton* button = qobject_cast<QPushButton*>( sender() );
+    if ( button )
+    {
+        if (ui->parsed_string->text().contains("ERROR!")) {
+            ui->parsed_string->clear();
+            ui->parsed_string->insert(button->text());
+        } else {
+            ui->parsed_string->insert( button->text() );
+        }
+    }
+}
+

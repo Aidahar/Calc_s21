@@ -55,6 +55,14 @@ private slots:
 
     void on_buton_9_clicked();
 
+    void on_Sqrt_clicked();
+
+    void on_UnarPL_clicked();
+
+    void on_L_BR_clicked();
+
+    void on_R_BR_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
