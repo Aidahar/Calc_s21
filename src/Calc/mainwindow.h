@@ -63,6 +63,24 @@ private slots:
 
     void on_R_BR_clicked();
 
+    void on_sin_clicked();
+
+    void on_cos_clicked();
+
+    void on_tan_clicked();
+
+    void on_ln_clicked();
+
+    void on_log_clicked();
+
+    void on_atan_clicked();
+
+    void on_acos_clicked();
+
+    void on_asin_clicked();
+
+    void on_Mod_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

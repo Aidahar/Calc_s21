@@ -351,3 +351,137 @@ void MainWindow::on_R_BR_clicked()
     }
 }
 
+void MainWindow::on_sin_clicked()
+{
+    QPushButton* button = qobject_cast<QPushButton*>( sender() );
+    if ( button )
+    {
+        if (ui->parsed_string->text().contains("ERROR!")) {
+            ui->parsed_string->clear();
+            ui->parsed_string->insert( "sin(" );
+        } else {
+            ui->parsed_string->insert( "sin(" );
+        }
+    }
+}
+
+
+void MainWindow::on_cos_clicked()
+{
+    QPushButton* button = qobject_cast<QPushButton*>( sender() );
+    if ( button )
+    {
+        if (ui->parsed_string->text().contains("ERROR!")) {
+            ui->parsed_string->clear();
+            ui->parsed_string->insert( "cos(" );
+        } else {
+            ui->parsed_string->insert( "cos(" );
+        }
+    }
+}
+
+
+void MainWindow::on_tan_clicked()
+{
+    QPushButton* button = qobject_cast<QPushButton*>( sender() );
+    if ( button )
+    {
+        if (ui->parsed_string->text().contains("ERROR!")) {
+            ui->parsed_string->clear();
+            ui->parsed_string->insert( "tan(" );
+        } else {
+            ui->parsed_string->insert( "tan(" );
+        }
+    }
+}
+
+
+void MainWindow::on_ln_clicked()
+{
+    QPushButton* button = qobject_cast<QPushButton*>( sender() );
+    if ( button )
+    {
+        if (ui->parsed_string->text().contains("ERROR!")) {
+            ui->parsed_string->clear();
+            ui->parsed_string->insert( "ln(" );
+        } else {
+            ui->parsed_string->insert( "ln(" );
+        }
+    }
+}
+
+
+void MainWindow::on_log_clicked()
+{
+    QPushButton* button = qobject_cast<QPushButton*>( sender() );
+    if ( button )
+    {
+        if (ui->parsed_string->text().contains("ERROR!")) {
+            ui->parsed_string->clear();
+            ui->parsed_string->insert( "log(" );
+        } else {
+            ui->parsed_string->insert( "log(" );
+        }
+    }
+}
+
+
+void MainWindow::on_atan_clicked()
+{
+    QPushButton* button = qobject_cast<QPushButton*>( sender() );
+    if ( button )
+    {
+        if (ui->parsed_string->text().contains("ERROR!")) {
+            ui->parsed_string->clear();
+            ui->parsed_string->insert( "atan(" );
+        } else {
+            ui->parsed_string->insert( "atan(" );
+        }
+    }
+}
+
+
+void MainWindow::on_acos_clicked()
+{
+    QPushButton* button = qobject_cast<QPushButton*>( sender() );
+    if ( button )
+    {
+        if (ui->parsed_string->text().contains("ERROR!")) {
+            ui->parsed_string->clear();
+            ui->parsed_string->insert( "acos(" );
+        } else {
+            ui->parsed_string->insert( "acos(" );
+        }
+    }
+}
+
+
+void MainWindow::on_asin_clicked()
+{
+    QPushButton* button = qobject_cast<QPushButton*>( sender() );
+    if ( button )
+    {
+        if (ui->parsed_string->text().contains("ERROR!")) {
+            ui->parsed_string->clear();
+            ui->parsed_string->insert( "asin(" );
+        } else {
+            ui->parsed_string->insert( "asin(" );
+        }
+    }
+}
+
+
+void MainWindow::on_Mod_clicked()
+{
+    QPushButton* button = qobject_cast<QPushButton*>( sender() );
+    if ( button )
+    {
+        if (ui->parsed_string->text().contains("ERROR!")) {
+            ui->parsed_string->clear();
+            ui->parsed_string->insert( "mod(" );
+        } else {
+            ui->parsed_string->insert( "mod(" );
+        }
+    }
+}
+
