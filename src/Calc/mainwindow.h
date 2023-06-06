@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QRegularExpressionValidator>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -80,6 +81,8 @@ private slots:
     void on_asin_clicked();
 
     void on_Mod_clicked();
+
+    void on_X_clicked();
 
 private:
     Ui::MainWindow *ui;

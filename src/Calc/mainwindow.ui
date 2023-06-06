@@ -6,9 +6,27 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1258</width>
-    <height>894</height>
+    <width>519</width>
+    <height>558</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>606</width>
+    <height>856</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
@@ -17,11 +35,17 @@
    <widget class="QPushButton" name="equal">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>720</y>
-      <width>141</width>
-      <height>81</height>
+      <x>410</x>
+      <y>490</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -53,11 +77,17 @@
    <widget class="QPushButton" name="plus">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>720</y>
-      <width>141</width>
-      <height>81</height>
+      <x>410</x>
+      <y>430</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -71,11 +101,17 @@
    <widget class="QPushButton" name="Minus">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>630</y>
-      <width>141</width>
-      <height>81</height>
+      <x>410</x>
+      <y>370</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -89,11 +125,17 @@
    <widget class="QPushButton" name="Mul">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>540</y>
-      <width>141</width>
-      <height>81</height>
+      <x>410</x>
+      <y>310</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -111,11 +153,17 @@
    <widget class="QPushButton" name="Del">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>450</y>
-      <width>141</width>
-      <height>81</height>
+      <x>410</x>
+      <y>250</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -129,11 +177,17 @@
    <widget class="QPushButton" name="C">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>360</y>
-      <width>141</width>
-      <height>81</height>
+      <x>410</x>
+      <y>190</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -147,11 +201,17 @@
    <widget class="QPushButton" name="percent">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>270</y>
-      <width>141</width>
-      <height>81</height>
+      <x>110</x>
+      <y>250</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -165,11 +225,17 @@
    <widget class="QPushButton" name="AC">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>360</y>
-      <width>141</width>
-      <height>81</height>
+      <x>110</x>
+      <y>190</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -184,10 +250,16 @@
     <property name="geometry">
      <rect>
       <x>310</x>
-      <y>450</y>
-      <width>141</width>
-      <height>81</height>
+      <y>310</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -201,11 +273,17 @@
    <widget class="QPushButton" name="button_8">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>450</y>
-      <width>141</width>
-      <height>81</height>
+      <x>210</x>
+      <y>310</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -219,11 +297,17 @@
    <widget class="QPushButton" name="button_7">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>450</y>
-      <width>141</width>
-      <height>81</height>
+      <x>110</x>
+      <y>310</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -237,11 +321,17 @@
    <widget class="QPushButton" name="button_4">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>540</y>
-      <width>141</width>
-      <height>81</height>
+      <x>110</x>
+      <y>370</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -255,11 +345,17 @@
    <widget class="QPushButton" name="button_5">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>540</y>
-      <width>141</width>
-      <height>81</height>
+      <x>210</x>
+      <y>370</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -274,10 +370,16 @@
     <property name="geometry">
      <rect>
       <x>310</x>
-      <y>540</y>
-      <width>141</width>
-      <height>81</height>
+      <y>370</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -289,17 +391,31 @@
     </property>
    </widget>
    <widget class="QPushButton" name="button_1">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>630</y>
-      <width>141</width>
-      <height>81</height>
+      <x>110</x>
+      <y>430</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
       <pointsize>22</pointsize>
+      <italic>false</italic>
+      <bold>false</bold>
+      <underline>false</underline>
+      <strikeout>false</strikeout>
+      <kerning>true</kerning>
      </font>
     </property>
     <property name="text">
@@ -309,11 +425,17 @@
    <widget class="QPushButton" name="button_2">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>630</y>
-      <width>141</width>
-      <height>81</height>
+      <x>210</x>
+      <y>430</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -328,10 +450,16 @@
     <property name="geometry">
      <rect>
       <x>310</x>
-      <y>630</y>
-      <width>141</width>
-      <height>81</height>
+      <y>430</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -345,11 +473,17 @@
    <widget class="QPushButton" name="button_0">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>720</y>
-      <width>141</width>
-      <height>81</height>
+      <x>210</x>
+      <y>490</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -363,11 +497,17 @@
    <widget class="QPushButton" name="button_tchk">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>720</y>
-      <width>141</width>
-      <height>81</height>
+      <x>310</x>
+      <y>490</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -382,10 +522,16 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
-      <width>591</width>
-      <height>71</height>
+      <y>70</y>
+      <width>491</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -399,11 +545,17 @@
    <widget class="QPushButton" name="Sqrt">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>270</y>
-      <width>141</width>
-      <height>81</height>
+      <x>310</x>
+      <y>250</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -417,11 +569,17 @@
    <widget class="QPushButton" name="Mod">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>270</y>
-      <width>141</width>
-      <height>81</height>
+      <x>210</x>
+      <y>250</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -429,17 +587,23 @@
      </font>
     </property>
     <property name="text">
-     <string>MOD</string>
+     <string>^</string>
     </property>
    </widget>
    <widget class="QPushButton" name="L_BR">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>360</y>
-      <width>141</width>
-      <height>81</height>
+      <x>210</x>
+      <y>190</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -454,10 +618,16 @@
     <property name="geometry">
      <rect>
       <x>310</x>
-      <y>360</y>
-      <width>141</width>
-      <height>81</height>
+      <y>190</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -471,11 +641,17 @@
    <widget class="QPushButton" name="UnarPL">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>270</y>
-      <width>141</width>
-      <height>81</height>
+      <x>10</x>
+      <y>490</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -490,10 +666,16 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>180</y>
-      <width>141</width>
-      <height>81</height>
+      <y>130</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -507,11 +689,17 @@
    <widget class="QPushButton" name="cos">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>180</y>
-      <width>141</width>
-      <height>81</height>
+      <x>110</x>
+      <y>130</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -525,11 +713,17 @@
    <widget class="QPushButton" name="tan">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>180</y>
-      <width>141</width>
-      <height>81</height>
+      <x>210</x>
+      <y>130</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -543,11 +737,17 @@
    <widget class="QPushButton" name="ln">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>180</y>
-      <width>141</width>
-      <height>81</height>
+      <x>410</x>
+      <y>130</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -561,11 +761,17 @@
    <widget class="QPushButton" name="log">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>90</y>
-      <width>141</width>
-      <height>81</height>
+      <x>310</x>
+      <y>130</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -580,10 +786,16 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>90</y>
-      <width>141</width>
-      <height>81</height>
+      <y>190</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -597,11 +809,17 @@
    <widget class="QPushButton" name="acos">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>90</y>
-      <width>141</width>
-      <height>81</height>
+      <x>10</x>
+      <y>250</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -615,11 +833,17 @@
    <widget class="QPushButton" name="atan">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>90</y>
-      <width>141</width>
-      <height>81</height>
+      <x>10</x>
+      <y>310</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="font">
      <font>
@@ -630,19 +854,168 @@
      <string>ATAN</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="X">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>430</y>
+      <width>91</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>X</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_00">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>490</y>
+      <width>91</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>00</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="parsed_x">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>370</y>
+      <width>91</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+      <italic>false</italic>
+      <bold>false</bold>
+      <underline>false</underline>
+      <strikeout>false</strikeout>
+      <kerning>true</kerning>
+     </font>
+    </property>
+    <property name="maxLength">
+     <number>254</number>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Credit">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>241</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Credit</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Graph">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>10</y>
+      <width>241</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Graph</string>
+    </property>
+   </widget>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1258</width>
-     <height>22</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <tabstops>
+  <tabstop>plus</tabstop>
+  <tabstop>Minus</tabstop>
+  <tabstop>Mul</tabstop>
+  <tabstop>Del</tabstop>
+  <tabstop>C</tabstop>
+  <tabstop>percent</tabstop>
+  <tabstop>AC</tabstop>
+  <tabstop>buton_9</tabstop>
+  <tabstop>button_8</tabstop>
+  <tabstop>button_7</tabstop>
+  <tabstop>button_4</tabstop>
+  <tabstop>button_5</tabstop>
+  <tabstop>button_6</tabstop>
+  <tabstop>button_1</tabstop>
+  <tabstop>button_2</tabstop>
+  <tabstop>button_3</tabstop>
+  <tabstop>button_0</tabstop>
+  <tabstop>button_tchk</tabstop>
+  <tabstop>equal</tabstop>
+  <tabstop>Sqrt</tabstop>
+  <tabstop>Mod</tabstop>
+  <tabstop>L_BR</tabstop>
+  <tabstop>R_BR</tabstop>
+  <tabstop>UnarPL</tabstop>
+  <tabstop>sin</tabstop>
+  <tabstop>cos</tabstop>
+  <tabstop>tan</tabstop>
+  <tabstop>ln</tabstop>
+  <tabstop>log</tabstop>
+  <tabstop>asin</tabstop>
+  <tabstop>acos</tabstop>
+  <tabstop>atan</tabstop>
+  <tabstop>parsed_string</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

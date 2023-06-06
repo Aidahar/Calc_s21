@@ -6,6 +6,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    setWindowTitle("Calculator");
+    ui->parsed_x->setValidator(new QRegularExpressionValidator(QRegularExpression("^[0-9]{10}"), this));
 }
 
 MainWindow::~MainWindow()
@@ -478,9 +480,23 @@ void MainWindow::on_Mod_clicked()
     {
         if (ui->parsed_string->text().contains("ERROR!")) {
             ui->parsed_string->clear();
-            ui->parsed_string->insert( "mod(" );
+            ui->parsed_string->insert( button->text() );
         } else {
-            ui->parsed_string->insert( "mod(" );
+            ui->parsed_string->insert( button->text() );
+        }
+    }
+}
+
+void MainWindow::on_X_clicked()
+{
+    QPushButton* button = qobject_cast<QPushButton*>( sender() );
+    if ( button )
+    {
+        if (ui->parsed_string->text().contains("ERROR!")) {
+            ui->parsed_string->clear();
+            ui->parsed_string->insert( button->text() );
+        } else {
+            ui->parsed_string->insert( button->text() );
         }
     }
 }
