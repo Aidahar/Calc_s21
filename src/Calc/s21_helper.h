@@ -5,11 +5,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "parse_string.h"
-#include "stack.h"
-
 enum status { ERR, OK };
 enum prior { BR, P_M, M_D, POW, SIN };
+
+#include "stack.h"
 
 int is_digit(char data);
 int len_data(const char *data);

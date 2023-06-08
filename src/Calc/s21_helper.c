@@ -17,7 +17,7 @@ int len_data(const char *data) {
 */
 int is_digit(char data) {
   int status = ERR;
-  if (48 <= data && data <= 57) {
+  if (46 == data || (48 <= data && data <= 57) || 120 == data) {
     status = OK;
   }
   return status;
@@ -177,24 +177,23 @@ int numbers(char *p, char *notation, int *jdx, int *idx) {
   return status;
 }
 
-// int parse_params() {
-
-// }
-
 int check_brakets(char *p) {
   int status = OK, id;
-  char *tmp = calloc(sizeof(char), 3);
-  for (id = 0; id < 2; ++id, ++p) {
-    tmp[id] = *p;
-  }
-  tmp[3] = '\0';
-  if (strstr(tmp, ")(") != NULL) {
-    status = ERR;
+  if (2 < len_data(p)) {
+    char *tmp = calloc(sizeof(char), 3);
+    for (id = 0; id < 2; ++id, ++p) {
+      tmp[id] = *p;
+    }
+    tmp[2] = '\0';
+    if (strstr(tmp, ")(") != NULL) {
+      status = ERR;
+    }
+    free(tmp);
   }
   return status;
 }
 
-void add_stack_last(node **stack, char * notation, int *jdx, int *pr, char *b) {
+void add_stack_last(node **stack, char *notation, int *jdx, int *pr, char *b) {
   while (!check_stack((*stack))) {
     pop_back(&(*stack), &(*pr), &(*b));
     add_notation(notation, &(*jdx), *b);

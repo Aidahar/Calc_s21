@@ -3,6 +3,13 @@
 
 #include <QMainWindow>
 #include <QRegularExpressionValidator>
+#include <QString>
+
+extern "C" {
+#include "parse_string.h"
+#include "stack.h"
+#include "s21_helper.h"
+}
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -83,6 +90,10 @@ private slots:
     void on_Mod_clicked();
 
     void on_X_clicked();
+
+    void on_equal_clicked();
+
+    void on_parsed_x_returnPressed();
 
 private:
     Ui::MainWindow *ui;
