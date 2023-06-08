@@ -2,6 +2,7 @@
 
 #include "./ui_mainwindow.h"
 #include "parse_string.h"
+#include "calculate.h"
 
 
 MainWindow::MainWindow(QWidget* parent)
@@ -419,7 +420,10 @@ void MainWindow::on_equal_clicked() {
   int status = parse_string(data, polish);
   if (status) {
     ui->parsed_string->clear();
-    ui->parsed_string->insert(polish);
+    double res = calculate(polish);
+    std::string str_res = std::to_string(res);
+    QString ans = QString::fromStdString(str_res);
+    ui->parsed_string->insert(ans);
   } else {
     ui->parsed_string->clear();
     ui->parsed_string->insert("ERROR!");

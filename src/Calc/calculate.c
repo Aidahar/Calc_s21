@@ -1,21 +1,21 @@
 #include "calculate.h"
 
-int main(void) {
-  char data[256] = "sin(1)";
-  double_node stack = {0};
-  char *notation = calloc(sizeof(char), len_data(data) * 2);
-  int status = parse_string(data, notation);
-  if (status == OK) {
-    printf("data = %s\n", data);
-    double ans = calculate(notation);
-    printf("answer = %.7f\n", ans);
-  } else {
-    printf("ERROR MOTHERFUCKER!\n");
-  }
-  free(notation);
+// int main(void) {
+//   char data[256] = "cos(1)";
+//   double_node stack = {0};
+//   char *notation = calloc(sizeof(char), len_data(data) * 2);
+//   int status = parse_string(data, notation);
+//   if (status == OK) {
+//     printf("data = %s\n", data);
+//     double ans = calculate(notation);
+//     printf("answer = %.7f\n", ans);
+//   } else {
+//     printf("ERROR MOTHERFUCKER!\n");
+//   }
+//   free(notation);
 
-  return 0;
-}
+//   return 0;
+// }
 
 double calculate(char *notation) {
   double result = 0.0, sec, first, answer;
@@ -38,6 +38,14 @@ double calculate(char *notation) {
       if ('%' == *p) float_mod(&numbers);
     } else if (is_trig(*p)) {
       if ('s' == *p) doubl_sin(&numbers);
+      if ('S' == *p) doubl_asin(&numbers);
+      if ('c' == *p) doubl_cos(&numbers);
+      if ('C' == *p) doubl_acos(&numbers);
+      if ('t' == *p) doubl_tan(&numbers);
+      if ('T' == *p) doubl_atan(&numbers);
+      if ('l' == *p) doubl_ln(&numbers);
+      if ('L' == *p) doubl_log(&numbers);
+      if ('q' == *p) doubl_sqrt(&numbers);
     }
   }
   pop_back_double(&numbers, &answer);
