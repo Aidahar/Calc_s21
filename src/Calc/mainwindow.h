@@ -4,9 +4,11 @@
 #include <QMainWindow>
 #include <QRegularExpressionValidator>
 #include <QString>
+#include <QCoreApplication>
 
 extern "C" {
 #include "parse_string.h"
+#include "calculate.h"
 #include "stack.h"
 #include "s21_helper.h"
 }

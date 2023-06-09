@@ -22,6 +22,11 @@ int check_numbers(const char *data, char *notation, int *jdx, int *idx);
 void add_notation(char *notation, int *jdx, char sym);
 int numbers(char *p, char *notation, int *jdx, int *idx);
 int check_brakets(char *p);
-void add_stack_last(node **stack, char * notation, int *jdx, int *pr, char *b);
+void add_stack_last(node **stack, char *notation, int *jdx, int *pr, char *b);
+int check_first(const char *data);
+int check_correct_string(const char *data);
+int check_correct_oper(const char *data);
+int check_trig(char c);
+int check_last_sym(const char *data);
 
 #endif  //  SRC_S21_HELPER_H_

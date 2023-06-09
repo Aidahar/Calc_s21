@@ -1,7 +1,7 @@
 #include "calculate.h"
 
 // int main(void) {
-//   char data[256] = "cos(1)";
+//   char data[256] = "sin(1.57)";
 //   double_node stack = {0};
 //   char *notation = calloc(sizeof(char), len_data(data) * 2);
 //   int status = parse_string(data, notation);
@@ -17,6 +17,10 @@
 //   return 0;
 // }
 
+/*
+  @breef функция вычисления
+  @params notation строка польской нотации
+*/
 double calculate(char *notation) {
   double result = 0.0, sec, first, answer;
   char *p;
@@ -51,7 +55,10 @@ double calculate(char *notation) {
   pop_back_double(&numbers, &answer);
   return answer;
 }
-
+/*
+  @breef функция получения числа
+  @params notation строка польской нотации
+*/
 double take_number(char **notation) {
   int i = 0;
   char double_number[MAXN] = {'\0'};
@@ -62,7 +69,10 @@ double take_number(char **notation) {
   }
   return atof(double_number);
 }
-
+/*
+  @breef функция проверки оператора
+  @params с символ
+*/
 int is_operator(char c) {
   int status = ERR;
   if ('+' == c || '-' == c || '*' == c || '/' == c || '^' == c || '%' == c) {
@@ -70,7 +80,10 @@ int is_operator(char c) {
   }
   return status;
 }
-
+/*
+  @breef функция проверки на тригонометрическую функцию
+  @params с символ
+*/
 int is_trig(char c) {
   int status = ERR;
   if ('s' == c || 'S' == c || 'c' == c || 'C' == c || 'l' == c || 'L' == c ||
@@ -79,7 +92,10 @@ int is_trig(char c) {
   }
   return status;
 }
-
+/*
+  @breef функция сложения
+  @params numbers стек чисел
+*/
 void plus(double_node **numbers) {
   double first, second, answer;
   pop_back_double(&*numbers, &second);
@@ -87,7 +103,10 @@ void plus(double_node **numbers) {
   answer = first + second;
   push_back_dnode(&*numbers, answer);
 }
-
+/*
+  @breef функция вычитания
+  @params numbers стек чисел
+*/
 void minus(double_node **numbers) {
   double first, second, answer;
   pop_back_double(&*numbers, &second);
@@ -95,7 +114,10 @@ void minus(double_node **numbers) {
   answer = first - second;
   push_back_dnode(&*numbers, answer);
 }
-
+/*
+  @breef функция умножения
+  @params numbers стек чисел
+*/
 void mul(double_node **numbers) {
   double first, second, answer;
   pop_back_double(&*numbers, &second);
@@ -103,7 +125,10 @@ void mul(double_node **numbers) {
   answer = first * second;
   push_back_dnode(&*numbers, answer);
 }
-
+/*
+  @breef функция деления
+  @params numbers стек чисел
+*/
 void divis(double_node **numbers) {
   double first, second, answer;
   pop_back_double(&*numbers, &second);
@@ -111,7 +136,10 @@ void divis(double_node **numbers) {
   answer = first / second;
   push_back_dnode(&*numbers, answer);
 }
-
+/*
+  @breef функция возведения в степень
+  @params numbers стек чисел
+*/
 void power(double_node **numbers) {
   double first, second, answer;
   pop_back_double(&*numbers, &second);
@@ -119,7 +147,10 @@ void power(double_node **numbers) {
   answer = pow(first, second);
   push_back_dnode(&*numbers, answer);
 }
-
+/*
+  @breef функция остаток от деления
+  @params numbers стек чисел
+*/
 void float_mod(double_node **numbers) {
   double first, second, answer;
   pop_back_double(&*numbers, &second);
@@ -127,63 +158,90 @@ void float_mod(double_node **numbers) {
   answer = fmod(first, second);
   push_back_dnode(&*numbers, answer);
 }
-
+/*
+  @breef функция sinus
+  @params numbers стек чисел
+*/
 void doubl_sin(double_node **numbers) {
   double first, answer;
   pop_back_double(&*numbers, &first);
   answer = sin(first);
   push_back_dnode(&*numbers, answer);
 }
-
+/*
+  @breef функция asinus
+  @params numbers стек чисел
+*/
 void doubl_asin(double_node **numbers) {
   double first, answer;
   pop_back_double(&*numbers, &first);
   answer = asin(first);
   push_back_dnode(&*numbers, answer);
 }
-
+/*
+  @breef функция cosinus
+  @params numbers стек чисел
+*/
 void doubl_cos(double_node **numbers) {
   double first, answer;
   pop_back_double(&*numbers, &first);
   answer = cos(first);
   push_back_dnode(&*numbers, answer);
 }
-
+/*
+  @breef функция acosinus
+  @params numbers стек чисел
+*/
 void doubl_acos(double_node **numbers) {
   double first, answer;
   pop_back_double(&*numbers, &first);
   answer = acos(first);
   push_back_dnode(&*numbers, answer);
 }
-
+/*
+  @breef функция tan
+  @params numbers стек чисел
+*/
 void doubl_tan(double_node **numbers) {
   double first, answer;
   pop_back_double(&*numbers, &first);
   answer = tan(first);
   push_back_dnode(&*numbers, answer);
 }
-
+/*
+  @breef функция atan
+  @params numbers стек чисел
+*/
 void doubl_atan(double_node **numbers) {
   double first, answer;
   pop_back_double(&*numbers, &first);
   answer = atan(first);
   push_back_dnode(&*numbers, answer);
 }
-
+/*
+  @breef функция натурального логарифма
+  @params numbers стек чисел
+*/
 void doubl_ln(double_node **numbers) {
   double first, answer;
   pop_back_double(&*numbers, &first);
   answer = log(first);
   push_back_dnode(&*numbers, answer);
 }
-
+/*
+  @breef функция десятичный логарифм
+  @params numbers стек чисел
+*/
 void doubl_log(double_node **numbers) {
   double first, answer;
   pop_back_double(&*numbers, &first);
   answer = log10(first);
   push_back_dnode(&*numbers, answer);
 }
-
+/*
+  @breef функция квадратного корня
+  @params numbers стек чисел
+*/
 void doubl_sqrt(double_node **numbers) {
   double first, answer;
   pop_back_double(&*numbers, &first);

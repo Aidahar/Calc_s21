@@ -1,30 +1,16 @@
 #include "parse_string.h"
 
-//int main(void) {
-//  char data[256] = "sin((123))";
-//  if (check_brackets(data)) {
-//    char *notation = calloc(sizeof(char), len_data(data) * 2);
-//    int status = parse_string(data, notation);
-//    if (status == OK) {
-//      printf("data = %s\n", data);
-//      print_notation(notation);
-//    } else {
-//      printf("ERROR MOTHERFUCKER!\n");
-//    }
-//    free(notation);
-//  } else {
-//    printf("ERRORS MOTHERFUCKER");
-//  }
-//  return 0;
-//}
-
+/*
+  @breef функция перевода строки в польскую нотацию
+  @params data строка данных
+  @params notation строка польской нотации
+*/
 int parse_string(char *data, char *notation) {
   int status = ERR;
-  if (data && check_brackets(data)) {
+  if (data && check_correct_string(data)) {
     struct Node *stack = NULL;
     int jdx, idx, pr;
-    char b;
-    char *p;
+    char b, *p;
     for (p = data, jdx = 0; *p; ++idx, ++p) {
       if (is_digit(*p) || *p == '.' || *p == 'x') {
         int k = 0;
