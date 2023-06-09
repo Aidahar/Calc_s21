@@ -11,6 +11,7 @@ extern "C" {
 #include "calculate.h"
 #include "stack.h"
 #include "s21_helper.h"
+#include <locale.h>
 }
 
 QT_BEGIN_NAMESPACE

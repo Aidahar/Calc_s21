@@ -174,10 +174,21 @@ int check_numbers(const char *data, char *notation, int *jdx, int *idx) {
       sym = *data;
       ++(*idx);
     }
+    if (!cor_oper_num(sym)) {
+      status = ERR;
+    }
   }
   return status;
 }
 
+int cor_oper_num(char c) {
+  int status = ERR;
+  if ('+' == c || '-' == c || '*' == c || '/' == c || '%' == c || '^' == c ||
+      ')' == c || '\0' == c) {
+    status = OK;
+  }
+  return status;
+}
 /*
   @breef функция добавления символа в нотацию
   @params notation строка нотации
@@ -192,8 +203,8 @@ void add_notation(char *notation, int *jdx, char sym) {
 
 /*
   @breef функция добавления чисел в нотацию
-    @params p строка данных
-    @params notation строка нотации
+  @params p строка данных
+  @params notation строка нотации
   @params jdx индексная переменная
   @params idx индексная переменная
 */
@@ -212,13 +223,16 @@ int numbers(char *p, char *notation, int *jdx, int *idx) {
 */
 int check_brakets(char *p) {
   int status = OK, id;
-  if (2 < len_data(p)) {
+  if (2 <= len_data(p)) {
     char *tmp = calloc(sizeof(char), 3);
     for (id = 0; id < 2; ++id, ++p) {
       tmp[id] = *p;
     }
     tmp[2] = '\0';
     if (strstr(tmp, ")(") != NULL) {
+      status = ERR;
+    }
+    if (is_digit(tmp[1]) || check_trig(tmp[1])) {
       status = ERR;
     }
     free(tmp);
@@ -294,9 +308,6 @@ int check_correct_string(const char *data) {
           status) {
         status = check_correct_oper(p);
       }
-      // if ('\0' != *p && ('(' == *p)) {
-      //   status = check_correct_brack(p);
-      // }
     }
   } else {
     status = ERR;
@@ -315,17 +326,3 @@ int check_last_sym(const char *data) {
   }
   return status;
 }
-
-// int check_correct_brack(const char *data) {
-//   int status = OK;
-//   const char *p = data;
-//   int len = len_data(p);
-//   if (2 < len) {
-//     ++(p);
-//     if (!is_digit(*p) && !check_trig(*p) && '+' != *p && '-' != *p &&
-//         '(' != *p) {
-//       status = ERR;
-//     }
-//   }
-//   return status;
-// }

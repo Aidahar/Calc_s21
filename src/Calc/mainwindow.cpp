@@ -5,11 +5,10 @@
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
-    QLocale loc = QLocale::c();
+    setlocale(LC_NUMERIC, "C");
     ui->setupUi(this);
     setWindowTitle("Calculator");
-    ui->parsed_x->setValidator(new QRegularExpressionValidator(
-                                   QRegularExpression("^[0-9]{1,10}.[0-9]{1,7}"), this));
+    ui->parsed_x->setValidator(new QRegularExpressionValidator(QRegularExpression("^[0-9]{1,10}.[0-9]{1,7}"), this));
 }
 
 MainWindow::~MainWindow() { delete ui; }
