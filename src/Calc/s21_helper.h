@@ -28,5 +28,6 @@ int check_correct_string(const char *data);
 int check_correct_oper(const char *data);
 int check_trig(char c);
 int check_last_sym(const char *data);
+// int check_correct_brack(const char *data);
 
 #endif  //  SRC_S21_HELPER_H_

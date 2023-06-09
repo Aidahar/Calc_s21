@@ -1,5 +1,4 @@
 #include "s21_helper.h"
-
 /*
   @breef вспомогательная функция считающая длину строки
   @params data строка
@@ -10,7 +9,6 @@ int len_data(const char *data) {
   }
   return p - data;
 }
-
 /*
   @breef вспомогательная функция проверки символа на число
   @params data символ
@@ -33,7 +31,6 @@ void print_notation(char *data) {
   }
   printf("\n");
 }
-
 /*
   @breef функция проверяет строку на тригонометрические функции и добавляетв
   стек их символы
@@ -89,7 +86,6 @@ int is_func(char *data, struct Node **stack, int *idx) {
   }
   return status;
 }
-
 /*
   @breef функция проверяет парность скобок
   @params data входная строка
@@ -125,7 +121,6 @@ int check_brackets(const char *data) {
   free(stack_br);
   return status;
 }
-
 /*
   @breef функция добавляет в стека скобку
   @params stack_br стек
@@ -136,7 +131,6 @@ void push_br(char *stack_br, char br, int *top) {
   ++*top;
   stack_br[*top] = br;
 }
-
 /*
   @breef функция проверки приоритета
   @params stack_br стек
@@ -144,7 +138,6 @@ void push_br(char *stack_br, char br, int *top) {
   @params top позиция в стеке
 */
 void peek(const char *stack_br, char *br, int top) { *br = stack_br[top]; }
-
 /*
   @breef функция достает из стека скобку
   @params stack_br стек
@@ -154,7 +147,6 @@ void pop_br(char *stack_br, int *top) {
   stack_br[*top] = '\0';
   --(*top);
 }
-
 /*
   @breef функция проверки числа
   @params data строка данных
@@ -214,7 +206,6 @@ int numbers(char *p, char *notation, int *jdx, int *idx) {
   }
   return status;
 }
-
 /*
   @breef функция проверки скобок
   @params p строка данных
@@ -234,7 +225,6 @@ int check_brakets(char *p) {
   }
   return status;
 }
-
 /*
   @breef функция очищающая стек
   @params stack стек операторов
@@ -249,7 +239,6 @@ void add_stack_last(node **stack, char *notation, int *jdx, int *pr, char *b) {
     add_notation(notation, &(*jdx), *b);
   }
 }
-
 /*
   @breef функция проверяет первый символ строки
   @params data строка данных
@@ -257,7 +246,8 @@ void add_stack_last(node **stack, char *notation, int *jdx, int *pr, char *b) {
 int check_first(const char *data) {
   int status = ERR;
   if ('s' == *data || 'c' == *data || 'a' == *data || 't' == *data ||
-      'l' == *data || is_digit(*data) || '+' == *data || '-' == *data) {
+      'l' == *data || is_digit(*data) || '+' == *data || '-' == *data ||
+      '(' == *data) {
     status = OK;
   }
   return status;
@@ -279,7 +269,6 @@ int check_correct_oper(const char *data) {
   }
   return status;
 }
-
 /*
   @breef функция проверяет корректность допустимых символов
   @params с символ
@@ -291,7 +280,6 @@ int check_trig(char c) {
   }
   return status;
 }
-
 /*
   @breef функция проверки корректности строки
   @params data строка данных
@@ -301,17 +289,24 @@ int check_correct_string(const char *data) {
   if (check_first(data) && check_last_sym(data) && check_brackets(data)) {
     const char *p;
     for (p = data; *p; ++p) {
-      if ('\0' != *p && ('*' == *p || '/' == *p || '%' == *p || '^' == *p) &&
+      if ('\0' != *p &&
+          ('*' == *p || '/' == *p || '%' == *p || '^' == *p || '(' == *p) &&
           status) {
         status = check_correct_oper(p);
       }
+      // if ('\0' != *p && ('(' == *p)) {
+      //   status = check_correct_brack(p);
+      // }
     }
   } else {
     status = ERR;
   }
   return status;
 }
-
+/*
+  @breef функция проверки корректности последнего символа
+  @params data строка данных
+*/
 int check_last_sym(const char *data) {
   int status = OK;
   int len = len_data(data);
@@ -320,3 +315,17 @@ int check_last_sym(const char *data) {
   }
   return status;
 }
+
+// int check_correct_brack(const char *data) {
+//   int status = OK;
+//   const char *p = data;
+//   int len = len_data(p);
+//   if (2 < len) {
+//     ++(p);
+//     if (!is_digit(*p) && !check_trig(*p) && '+' != *p && '-' != *p &&
+//         '(' != *p) {
+//       status = ERR;
+//     }
+//   }
+//   return status;
+// }
