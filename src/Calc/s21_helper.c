@@ -276,8 +276,7 @@ int check_correct_oper(const char *data) {
   int len = len_data(p);
   if (2 < len) {
     ++(p);
-    if (!is_digit(*p) && !check_trig(*p) && '+' != *p && '-' != *p &&
-        '(' != *p) {
+    if (!is_digit(*p) && !check_trig(*p) && '(' != *p) {
       status = ERR;
     }
   }
@@ -304,7 +303,8 @@ int check_correct_string(const char *data) {
     const char *p;
     for (p = data; *p; ++p) {
       if ('\0' != *p &&
-          ('*' == *p || '/' == *p || '%' == *p || '^' == *p || '(' == *p) &&
+          ('+' == *p || '-' == *p || '*' == *p || '/' == *p || '%' == *p ||
+           '^' == *p || '(' == *p) &&
           status) {
         status = check_correct_oper(p);
       }

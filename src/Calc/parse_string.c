@@ -1,7 +1,7 @@
 #include "parse_string.h"
 
 // int main(void) {
-//   char data[256] = "((25+2)*2)";
+//   char data[256] = "2+((2)*2)";
 //   double_node stack = {0};
 //   char *notation = calloc(sizeof(char), len_data(data) * 2);
 //   int status = parse_string(data, notation);
