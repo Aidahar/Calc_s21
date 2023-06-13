@@ -1,13 +1,14 @@
 #include "calculate.h"
 
 // int main(void) {
-//   char data[256] = "sin(1.57)";
+//   char data[256] = "sin(x)";
 //   double_node stack = {0};
 //   char *notation = calloc(sizeof(char), len_data(data) * 2);
 //   int status = parse_string(data, notation);
+//   double x = 1.0;
 //   if (status == OK) {
 //     printf("data = %s\n", data);
-//     double ans = calculate(notation);
+//     double ans = calculate(notation, x);
 //     printf("answer = %.7f\n", ans);
 //   } else {
 //     printf("ERROR MOTHERFUCKER!\n");
@@ -21,7 +22,7 @@
   @breef функция вычисления
   @params notation строка польской нотации
 */
-double calculate(char *notation) {
+double calculate(char *notation, double x) {
   double result = 0.0, sec, first, answer;
   char *p;
   char double_number[MAXN] = {'\0'};
@@ -29,10 +30,14 @@ double calculate(char *notation) {
   double_node *numbers = {0};
   for (i = 0, p = notation; *p; ++p) {
     if (is_digit(*p)) {
-      result = take_number(&p);
-      push_back_dnode(&numbers, result);
-      i = 0;
-      memset(double_number, 0, sizeof(double_number));
+      if ('x' == *p) {
+        push_back_dnode(&numbers, x);
+      } else {
+        result = take_number(&p);
+        push_back_dnode(&numbers, result);
+        i = 0;
+        memset(double_number, 0, sizeof(double_number));
+      }
     } else if (is_operator(*p)) {
       if ('+' == *p) plus(&numbers);
       if ('-' == *p) minus(&numbers);

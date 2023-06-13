@@ -279,11 +279,12 @@ int check_correct_string(const char *data) {
     }
     for (p = data; *p; ++p) {
       if ('\0' != *p &&
-          ('*' == *p || '/' == *p || '%' == *p || '^' == *p || '(' == *p) &&
+          ('+' == *p || '-' == *p || '*' == *p || '/' == *p || '%' == *p ||
+           '^' == *p || '(' == *p) &&
           status) {
         status = check_correct_oper(p);
       }
-      if ('\0' != *p && ('+' == *p || '-' == *p) && status) {
+      if (('+' == *p || '-' == *p) && status) {
         status = check_plus_min(p);
       }
     }

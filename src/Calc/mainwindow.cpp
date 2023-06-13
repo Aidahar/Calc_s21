@@ -416,8 +416,14 @@ void MainWindow::on_equal_clicked() {
     }
     int status = parse_string(data, polish);
     if (status) {
+        double x;
         ui->parsed_string->clear();
-        double res = calculate(polish);
+        if (ui->parsed_x->text().isEmpty()) {
+                x = 1.0;
+        } else {
+                x = ui->parsed_x->text().toDouble();
+        }
+        double res = calculate(polish, x);
         ui->parsed_string->insert(QString::number(res, 'g', 7));
     } else {
         ui->parsed_string->clear();
@@ -425,15 +431,5 @@ void MainWindow::on_equal_clicked() {
     }
 }
 
-void MainWindow::on_parsed_x_returnPressed() {
-    QString x = "", input = ui->parsed_string->text();
-    if (input.contains('x')) {
-        x = ui->parsed_x->text();
-        input.replace(QRegularExpression("[x]"), x);
-    } else {
-        x = "1";
-    }
-    ui->parsed_string->setText(input);
-    ui->parsed_x->releaseKeyboard();
-}
+
 

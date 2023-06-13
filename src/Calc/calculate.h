@@ -5,7 +5,7 @@
 #include "parse_string.h"
 #define MAXN 256
 
-double calculate(char *notation);
+double calculate(char *notation, double x);
 double take_number(char **notation);
 int is_operator(char c);
 int is_trig(char c);

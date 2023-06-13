@@ -96,8 +96,6 @@ private slots:
 
     void on_equal_clicked();
 
-    void on_parsed_x_returnPressed();
-
 private:
     Ui::MainWindow *ui;
 };
