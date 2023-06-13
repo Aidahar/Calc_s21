@@ -6,6 +6,7 @@
 #include <QString>
 #include <QCoreApplication>
 
+
 extern "C" {
 #include "parse_string.h"
 #include "calculate.h"
@@ -13,6 +14,8 @@ extern "C" {
 #include "s21_helper.h"
 #include <locale.h>
 }
+
+#include "qcustomplot.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -95,6 +98,8 @@ private slots:
     void on_X_clicked();
 
     void on_equal_clicked();
+
+    void on_Graph_clicked();
 
 private:
     Ui::MainWindow *ui;

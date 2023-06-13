@@ -431,5 +431,8 @@ void MainWindow::on_equal_clicked() {
     }
 }
 
+void MainWindow::on_Graph_clicked()
+{
 
+}
 
