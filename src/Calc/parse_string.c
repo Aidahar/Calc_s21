@@ -1,7 +1,7 @@
 #include "parse_string.h"
 
 // int main(void) {
-//   char data[256] = "2+((2)*2)";
+//   char data[256] = "-2+(+(-2)*2)";
 //   double_node stack = {0};
 //   char *notation = calloc(sizeof(char), len_data(data) * 2);
 //   int status = parse_string(data, notation);
@@ -10,6 +10,7 @@
 //   } else {
 //     printf("ERROR MOTHERFUCKER!\n");
 //   }
+//   printf("notation = %s\n", notation);
 //   free(notation);
 //   return 0;
 // }
@@ -22,9 +23,12 @@ int parse_string(char *data, char *notation) {
   int status = ERR;
   if (data && check_correct_string(data)) {
     struct Node *stack = NULL;
-    int jdx, idx, pr;
-    char b, *p;
-    for (p = data, jdx = 0; *p; ++idx, ++p) {
+    int jdx = 0, idx, pr;
+    char b, *p = data;
+    if (check_unar(p[0])) {
+      add_zero_notation(notation, &jdx);
+    }
+    for (; *p; ++idx, ++p) {
       if (is_digit(*p) || *p == '.' || *p == 'x') {
         int k = 0;
         if (!numbers(p, notation, &jdx, &k)) {
@@ -36,6 +40,11 @@ int parse_string(char *data, char *notation) {
         }
       } else if ('(' == *p) {
         push_back(&stack, BR, *p);
+        ++p;
+        if (check_unar(*p)) {
+          add_zero_notation(notation, &jdx);
+        }
+        --p;
         status = OK;
       } else if ('+' == *p || '-' == *p) {
         add_stack(&stack, notation, &jdx, P_M);

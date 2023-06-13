@@ -29,5 +29,7 @@ int check_correct_oper(const char *data);
 int check_trig(char c);
 int check_last_sym(const char *data);
 int cor_oper_num(char c);
+int check_unar(char c);
+void add_zero_notation(char *notation, int *jdx);
 
 #endif  //  SRC_S21_HELPER_H_

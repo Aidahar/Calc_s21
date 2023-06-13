@@ -202,6 +202,18 @@ void add_notation(char *notation, int *jdx, char sym) {
 }
 
 /*
+  @breef функция добавления Нуля в нотацию
+  @params notation строка нотации
+  @params jdx индексная переменная
+  @params sym символ который добавляем
+*/
+void add_zero_notation(char *notation, int *jdx) {
+  notation[(*jdx)] = '0';
+  notation[++(*jdx)] = ' ';
+  ++(*jdx);
+}
+
+/*
   @breef функция добавления чисел в нотацию
   @params p строка данных
   @params notation строка нотации
@@ -253,46 +265,7 @@ void add_stack_last(node **stack, char *notation, int *jdx, int *pr, char *b) {
     add_notation(notation, &(*jdx), *b);
   }
 }
-/*
-  @breef функция проверяет первый символ строки
-  @params data строка данных
-*/
-int check_first(const char *data) {
-  int status = ERR;
-  if ('s' == *data || 'c' == *data || 'a' == *data || 't' == *data ||
-      'l' == *data || is_digit(*data) || '+' == *data || '-' == *data ||
-      '(' == *data) {
-    status = OK;
-  }
-  return status;
-}
-/*
-  @breef функция проверяет корректность ввода операторов
-  @params data строка данных
-*/
-int check_correct_oper(const char *data) {
-  int status = OK;
-  const char *p = data;
-  int len = len_data(p);
-  if (2 < len) {
-    ++(p);
-    if (!is_digit(*p) && !check_trig(*p) && '(' != *p) {
-      status = ERR;
-    }
-  }
-  return status;
-}
-/*
-  @breef функция проверяет корректность допустимых символов
-  @params с символ
-*/
-int check_trig(char c) {
-  int status = ERR;
-  if ('s' == c || 'c' == c || 'a' == c || 't' == c || 'l' == c) {
-    status = OK;
-  }
-  return status;
-}
+
 /*
   @breef функция проверки корректности строки
   @params data строка данных
@@ -315,6 +288,19 @@ int check_correct_string(const char *data) {
   return status;
 }
 /*
+  @breef функция проверяет первый символ строки
+  @params data строка данных
+*/
+int check_first(const char *data) {
+  int status = ERR;
+  if ('s' == *data || 'c' == *data || 'a' == *data || 't' == *data ||
+      'l' == *data || is_digit(*data) || '+' == *data || '-' == *data ||
+      '(' == *data) {
+    status = OK;
+  }
+  return status;
+}
+/*
   @breef функция проверки корректности последнего символа
   @params data строка данных
 */
@@ -323,6 +309,46 @@ int check_last_sym(const char *data) {
   int len = len_data(data);
   if (!is_digit(data[len - 1]) && ')' != data[len - 1]) {
     status = ERR;
+  }
+  return status;
+}
+/*
+  @breef функция проверяет корректность ввода операторов
+  @params data строка данных
+*/
+int check_correct_oper(const char *data) {
+  int status = OK;
+  const char *p = data;
+  int len = len_data(p);
+  if (2 < len) {
+    ++(p);
+    if (!is_digit(*p) && !check_trig(*p) && '(' != *p && '+' != *p &&
+        '-' != *p) {
+      status = ERR;
+    }
+  }
+  return status;
+}
+/*
+  @breef функция проверяет корректность допустимых символов
+  @params с символ
+*/
+int check_trig(char c) {
+  int status = ERR;
+  if ('s' == c || 'c' == c || 'a' == c || 't' == c || 'l' == c) {
+    status = OK;
+  }
+  return status;
+}
+
+/*
+  @breef функция проверяет унарный плюс или минус
+  @params data строка
+*/
+int check_unar(char c) {
+  int status = ERR;
+  if ('+' == c || '-' == c) {
+    status = OK;
   }
   return status;
 }
