@@ -1,19 +1,19 @@
 #include "parse_string.h"
 
-// int main(void) {
-//   char data[256] = "-2+(+(-2)*2)";
-//   double_node stack = {0};
-//   char *notation = calloc(sizeof(char), len_data(data) * 2);
-//   int status = parse_string(data, notation);
-//   if (status == OK) {
-//     printf("data = %s\n", data);
-//   } else {
-//     printf("ERROR MOTHERFUCKER!\n");
-//   }
-//   printf("notation = %s\n", notation);
-//   free(notation);
-//   return 0;
-// }
+int main(void) {
+  char data[256] = "-2-+(+(-2)*2)";
+  double_node stack = {0};
+  char *notation = calloc(sizeof(char), len_data(data) * 2);
+  int status = parse_string(data, notation);
+  if (status == OK) {
+    printf("data = %s\n", data);
+  } else {
+    printf("ERROR MOTHERFUCKER!\n");
+  }
+  printf("notation = %s\n", notation);
+  free(notation);
+  return 0;
+}
 /*
   @breef функция перевода строки в польскую нотацию
   @params data строка данных

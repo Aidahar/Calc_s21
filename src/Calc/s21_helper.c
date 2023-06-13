@@ -274,15 +274,29 @@ int check_correct_string(const char *data) {
   int status = OK;
   if (check_first(data) && check_last_sym(data) && check_brackets(data)) {
     const char *p;
+    if ('+' == *data || '-' == *data) {
+      ++data;
+    }
     for (p = data; *p; ++p) {
       if ('\0' != *p &&
-          ('+' == *p || '-' == *p || '*' == *p || '/' == *p || '%' == *p ||
-           '^' == *p || '(' == *p) &&
+          ('*' == *p || '/' == *p || '%' == *p || '^' == *p || '(' == *p) &&
           status) {
         status = check_correct_oper(p);
       }
+      if ('\0' != *p && ('+' == *p || '-' == *p) && status) {
+        status = check_plus_min(p);
+      }
     }
   } else {
+    status = ERR;
+  }
+  return status;
+}
+
+int check_plus_min(const char *data) {
+  int status = OK;
+  ++data;
+  if ('+' == *data || '-' == *data) {
     status = ERR;
   }
   return status;

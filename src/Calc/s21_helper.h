@@ -31,5 +31,6 @@ int check_last_sym(const char *data);
 int cor_oper_num(char c);
 int check_unar(char c);
 void add_zero_notation(char *notation, int *jdx);
+int check_plus_min(const char *data);
 
 #endif  //  SRC_S21_HELPER_H_
