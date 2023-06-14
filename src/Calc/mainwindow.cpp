@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget* parent)
     ui->setupUi(this);
     setWindowTitle("Calculator");
     ui->parsed_x->setValidator(new QRegularExpressionValidator(QRegularExpression("^[0-9]{1,10}.[0-9]{1,7}"), this));
+
 }
 
 MainWindow::~MainWindow() { delete ui; }
@@ -479,6 +480,7 @@ void MainWindow::on_equal_clicked() {
 
 void MainWindow::on_pushButton_clicked()
 {
+    ui->set_scale->setValidator(new QRegularExpressionValidator(QRegularExpression("^[0-9]{1,10}.[0-9]{1,7}"), this));
     QString parsed = ui->parsed_string->text();
     std::string str = parsed.toStdString();
     char* data = (char*)calloc(sizeof(char), 255);
@@ -487,20 +489,14 @@ void MainWindow::on_pushButton_clicked()
         strcpy(data, str.c_str());
     }
     int status = parse_string(data, polish);
-    double x_str;
+    double x_str, a, b, h = 0.2;
     if (status) {
-        ui->parsed_string->clear();
         if (ui->parsed_x->text().isEmpty()) {
         } else {
                 x_str = ui->parsed_x->text().toDouble();
         }
         double res = calculate(polish, x_str);
-        ui->parsed_string->insert(QString::number(res, 'g', 7));
-    } else {
-        ui->parsed_string->clear();
-        ui->parsed_string->insert("ERROR!");
     }
-    double a, b, h = 0.2;
     if (ui->set_x->text().isEmpty()) {
         a = -10;
     } else {
@@ -511,7 +507,9 @@ void MainWindow::on_pushButton_clicked()
     } else {
         b = ui->set_y->text().toDouble();
     }
-    if (ui->set_scale->text().isEmpty()) {
+    if (ui->set_scale->text().isEmpty() ) {
+        h = 0.2;
+    } else if (ui->set_scale->text().contains(',')){
         h = 0.2;
     } else {
         h = ui->set_scale->text().toDouble();
@@ -523,7 +521,7 @@ void MainWindow::on_pushButton_clicked()
         double res = calculate(polish, X);
         x[i] = X;
         y[i] = res;
-        i++;
+        ++i;
       }
       ui->widget->clearGraphs();
       ui->widget->addGraph();
@@ -531,9 +529,78 @@ void MainWindow::on_pushButton_clicked()
       ui->widget->xAxis->setLabel("X");
       ui->widget->yAxis->setLabel("Y");
       ui->widget->xAxis->setRange(a, b);
-      ui->widget->yAxis->setRange(a, b);
+
+      i = 0;
+      while (isnan(y[i]) == true || isinf(y[i]) == true) i++;
+      double minY = y[i], maxY = y[i];
+      for (double k = i + 1; k < N; k++) {
+        if (isnan(y[k]) == false && isinf(y[k]) == false) {
+          if (y[k] <= minY) minY = y[k];
+          if (y[k] >= maxY) maxY = y[k];
+        }
+      }
+      double sr = maxY - (maxY - minY) / 2;
+      if (strstr(polish, "t") != NULL) {
+        minY = sr - 30;
+        maxY = sr + 30;
+      }
+      ui->widget->yAxis->setRange(minY-0.2, maxY+0.2);
       ui->widget->replot();
       ui->widget->setInteraction(QCP::iRangeZoom, true);
       ui->widget->setInteraction(QCP::iRangeDrag, true);
+//    if (ui->set_x->text().isEmpty()) {
+//        a = -10;
+//    } else {
+//        a = ui->set_x->text().toDouble();
+//    }
+//    if (ui->set_x->text().isEmpty()) {
+//        b = 10;
+//    } else {
+//        b = ui->set_y->text().toDouble();
+//    }
+//    if (ui->set_scale->text().isEmpty()) {
+//        h = 0.2;
+//    } else {
+//        h = ui->set_scale->text().toDouble();
+//    }
+//    int N = (b - a) / h - 1;
+//      QVector<double> x(N), y(N);
+//      int i = 0;
+//      for (double X = a; X <= b; X = a + h * i) {
+//        double res = calculate(polish, X);
+//        x[i] = X;
+//        y[i] = res;
+//        ++i;
+//      }
+//      ui->widget->clearGraphs();
+//      ui->widget->addGraph();
+//      ui->widget->graph()->addData(x, y);
+//      ui->widget->xAxis->setLabel("X");
+//      ui->widget->yAxis->setLabel("Y");
+//      ui->widget->xAxis->setRange(a, b);
+
+//      i = 0;
+//      while (isnan(y[i]) == true || isinf(y[i]) == true) i++;
+//      double minY = y[i], maxY = y[i];
+//      for (double k = i + 1; k < N; k++) {
+//        if (isnan(y[k]) == false && isinf(y[k]) == false) {
+//          if (y[k] <= minY) minY = y[k];
+//          if (y[k] >= maxY) maxY = y[k];
+//        }
+//      }
+//      double sr = maxY - (maxY - minY) / 2;
+//      if (strstr(polish, "t") != NULL) {
+//        minY = sr - 30;
+//        maxY = sr + 30;
+//      }
+//      double minY = y[0], maxY = y[0];
+//      for (int i = 1; i < N; i++) {
+//        if (y[i] < minY) minY = y[i];
+//        if (y[i] > maxY) maxY = y[i];
+//      }
+//      ui->widget->yAxis->setRange(minY, maxY);
+//      ui->widget->replot();
+//      ui->widget->setInteraction(QCP::iRangeZoom, true);
+//      ui->widget->setInteraction(QCP::iRangeDrag, true);
 }
 
