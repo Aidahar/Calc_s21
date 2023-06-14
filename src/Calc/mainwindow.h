@@ -8,14 +8,15 @@
 
 
 extern "C" {
-#include "parse_string.h"
-#include "calculate.h"
-#include "stack.h"
-#include "s21_helper.h"
-#include <locale.h>
+    #include "parse_string.h"
+    #include "calculate.h"
+    #include "stack.h"
+    #include "s21_helper.h"
+    #include <locale.h>
 }
 
 #include "qcustomplot.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -99,9 +100,13 @@ private slots:
 
     void on_equal_clicked();
 
-    void on_Graph_clicked();
+//    void on_Credit_2_tabBarClicked(int index);
+
+    void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;
+    QCustomPlot *customPlot;
+    QCPGraph *graphic;
 };
 #endif // MAINWINDOW_H

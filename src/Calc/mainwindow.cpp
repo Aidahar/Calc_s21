@@ -431,8 +431,109 @@ void MainWindow::on_equal_clicked() {
     }
 }
 
-void MainWindow::on_Graph_clicked()
-{
 
+//void MainWindow::on_Credit_2_tabBarClicked(int index)
+//{
+//    QString parsed = ui->parsed_string->text();
+//    std::string str = parsed.toStdString();
+//    char* data = (char*)calloc(sizeof(char), 255);
+//    char* polish = (char*)calloc(sizeof(char), 255);
+//    if (data) {
+//        strcpy(data, str.c_str());
+//    }
+//    int status = parse_string(data, polish);
+//    if (status) {
+//        double x;
+//        ui->parsed_string->clear();
+//        if (ui->parsed_x->text().isEmpty()) {
+//                x = 1.0;
+//        } else {
+//                x = ui->parsed_x->text().toDouble();
+//        }
+//        double res = calculate(polish, x);
+//        ui->parsed_string->insert(QString::number(res, 'g', 7));
+//    } else {
+//        ui->parsed_string->clear();
+//        ui->parsed_string->insert("ERROR!");
+//    }
+//    double a = ui->set_x->text().toDouble();
+//    double b = ui->set_y->text().toDouble();
+//    double h = 0.001;
+//    int N = (b - a) / h + 1;
+//      QVector<double> x(N), y(N);
+//      int i = 0;
+//      for (double X = a; X <= b; X = a + h * i) {
+//        double res = calculate(polish, i);
+//        x[i] = X;
+//        y[i] = res;
+//        i++;
+//      }
+//      ui->widget->clearGraphs();
+//      ui->widget->addGraph();
+//      ui->widget->graph()->addData(x, y);
+//      ui->widget->xAxis->setLabel("X");
+//      ui->widget->yAxis->setLabel("Y");
+//      ui->widget->xAxis->setRange(a, b);
+//      ui->widget->replot();
+//}
+
+void MainWindow::on_pushButton_clicked()
+{
+    QString parsed = ui->parsed_string->text();
+    std::string str = parsed.toStdString();
+    char* data = (char*)calloc(sizeof(char), 255);
+    char* polish = (char*)calloc(sizeof(char), 255);
+    if (data) {
+        strcpy(data, str.c_str());
+    }
+    int status = parse_string(data, polish);
+    double x_str;
+    if (status) {
+        ui->parsed_string->clear();
+        if (ui->parsed_x->text().isEmpty()) {
+        } else {
+                x_str = ui->parsed_x->text().toDouble();
+        }
+        double res = calculate(polish, x_str);
+        ui->parsed_string->insert(QString::number(res, 'g', 7));
+    } else {
+        ui->parsed_string->clear();
+        ui->parsed_string->insert("ERROR!");
+    }
+    double a, b, h = 0.2;
+    if (ui->set_x->text().isEmpty()) {
+        a = -10;
+    } else {
+        a = ui->set_x->text().toDouble();
+    }
+    if (ui->set_x->text().isEmpty()) {
+        b = 10;
+    } else {
+        b = ui->set_y->text().toDouble();
+    }
+    if (ui->set_scale->text().isEmpty()) {
+        h = 0.2;
+    } else {
+        h = ui->set_scale->text().toDouble();
+    }
+    int N = (b - a) / h + 1;
+      QVector<double> x(N), y(N);
+      int i = 0;
+      for (double X = a; X <= b; X = a + h * i) {
+        double res = calculate(polish, X);
+        x[i] = X;
+        y[i] = res;
+        i++;
+      }
+      ui->widget->clearGraphs();
+      ui->widget->addGraph();
+      ui->widget->graph()->addData(x, y);
+      ui->widget->xAxis->setLabel("X");
+      ui->widget->yAxis->setLabel("Y");
+      ui->widget->xAxis->setRange(a, b);
+      ui->widget->yAxis->setRange(a, b);
+      ui->widget->replot();
+      ui->widget->setInteraction(QCP::iRangeZoom, true);
+      ui->widget->setInteraction(QCP::iRangeDrag, true);
 }
 
