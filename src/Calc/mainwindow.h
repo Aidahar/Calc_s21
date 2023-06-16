@@ -100,7 +100,7 @@ private slots:
 
     void on_equal_clicked();
 
-//    void on_Credit_2_tabBarClicked(int index);
+    void check_param_scale(double *a, double *b, double *h);
 
     void on_pushButton_clicked();
 

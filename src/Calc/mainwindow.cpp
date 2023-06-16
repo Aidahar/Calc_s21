@@ -9,7 +9,9 @@ MainWindow::MainWindow(QWidget* parent)
     ui->setupUi(this);
     setWindowTitle("Calculator");
     ui->parsed_x->setValidator(new QRegularExpressionValidator(QRegularExpression("^[0-9]{1,10}.[0-9]{1,7}"), this));
-
+    ui->set_x->setValidator(new QRegularExpressionValidator(QRegularExpression("^[+-]?[0-9]{1,7}.[0-9]{1,7}"), this));
+    ui->set_y->setValidator(new QRegularExpressionValidator(QRegularExpression("^[+-]?[0-9]{1,7}.[0-9]{1,7}"), this));
+    ui->set_scale->setValidator(new QRegularExpressionValidator(QRegularExpression("^[+-]?[0-9]{1,7}.[0-9]{1,7}"), this));
 }
 
 MainWindow::~MainWindow() { delete ui; }
@@ -443,44 +445,74 @@ void MainWindow::on_pushButton_clicked()
     }
     int status = parse_string(data, polish);
     double x_str, a = -10, b = 10, h = 0.1;
-    if (!ui->set_x->text().isEmpty()) {
-        a = ui->set_x->text().toDouble();;
-    }
-    if (!ui->set_x->text().isEmpty()) {
-        b = ui->set_y->text().toDouble();
-    }
+    check_param_scale(&a, &b, &h);
     int N = (b - a) / h + 1;
-      QVector<double> x(N), y(N);
-      int i = 0;
-      for (double X = a; X <= b; X = a + h * i) {
+    QVector<double> x(N), y(N);
+    int i = 0;
+    for (double X = a; X <= b; X = a + h * i) {
         double res = calculate(polish, X);
         x[i] = X;
         y[i] = res;
         ++i;
-      }
-      ui->widget->clearGraphs();
-      ui->widget->addGraph();
-      ui->widget->graph()->addData(x, y);
-      ui->widget->xAxis->setLabel("X");
-      ui->widget->yAxis->setLabel("Y");
-      ui->widget->xAxis->setRange(a, b);
-      i = 0;
-      while (isnan(y[i]) == true || isinf(y[i]) == true) i++;
-      double minY = y[i], maxY = y[i];
-      for (double k = i + 1; k < N; ++k) {
+    }
+    ui->widget->clearGraphs();
+    ui->widget->addGraph();
+    ui->widget->graph()->addData(x, y);
+    ui->widget->graph()->setLineStyle(QCPGraph::lsNone);
+    ui->widget->graph(0)->setScatterStyle(
+      QCPScatterStyle(QCPScatterStyle::ssDisc, 1));
+    ui->widget->xAxis->setLabel("X");
+    ui->widget->yAxis->setLabel("Y");
+    ui->widget->xAxis->setRange(a, b);
+    i = 0;
+    while (isnan(y[i]) == true || isinf(y[i]) == true) i++;
+    double minY = y[i], maxY = y[i];
+    for (double k = i + 1; k < N; ++k) {
         if (isnan(y[k]) == false && isinf(y[k]) == false) {
           if (y[k] <= minY) minY = y[k];
           if (y[k] >= maxY) maxY = y[k];
         }
-      }
-      double sr = maxY - (maxY - minY) / 2;
-      if (strstr(polish, "t") != NULL) {
+    }
+    double sr = maxY - (maxY - minY) / 2;
+    if (strstr(polish, "t") != NULL) {
         minY = sr - 30;
         maxY = sr + 30;
-      }
-      ui->widget->yAxis->setRange(minY-0.2, maxY+0.2);
-      ui->widget->replot();
-      ui->widget->setInteraction(QCP::iRangeZoom, true);
-      ui->widget->setInteraction(QCP::iRangeDrag, true);
+    }
+    ui->widget->yAxis->setRange(minY-0.2, maxY+0.2);
+    ui->widget->replot();
+    ui->widget->setInteraction(QCP::iRangeZoom, true);
+    ui->widget->setInteraction(QCP::iRangeDrag, true);
 }
 
+void MainWindow::check_param_scale(double *a, double *b, double *h) {
+    if (!ui->set_x->text().isEmpty()) {
+        *a = ui->set_x->text().toDouble();
+    }
+    if (!ui->set_x->text().isEmpty()) {
+        *b = ui->set_y->text().toDouble();
+    }
+    if(!ui->set_scale->text().isEmpty()) {
+        *h = ui->set_scale->text().toDouble();
+    }
+    if ( (*a / *h) >= 10000000.0 ||  (*a / *h) <= -10000000.0) {
+        QMessageBox errMsg;
+        errMsg.about(this, "WARNING!!!", "Не корректный scale (программа не может отрисовать больше десяти миллионов точек). Введите пожалуйста корректные параметры!");
+        *a = -10;
+        *b = 10;
+        *h = 0.1;
+    }
+    if (*a >= *b) {
+        QMessageBox errMsg;
+        errMsg.about(this, "WARNING!!!", "x_min не может быть больше или равен x_max. Введите пожалуйста корректные параметры!");
+        *a = -10;
+        *b = 10;
+        *h = 0.1;
+    }
+    if ((*b - *a) <= *h) {
+        QMessageBox errMsg;
+        errMsg.about(this, "WARNING!!!", "Не корректный scale (должен попадать в диапазон махимума и минимума для корректной отрисовки графика). Введите пожалуйста корректные параметры!");
+        *a = -10;
+        *b = 10;
+        *h = 0.1;
+    }
+}

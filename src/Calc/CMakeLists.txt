@@ -29,6 +29,8 @@ set(PROJECT_SOURCES
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    credit_calc.h
+    credit_calc.c
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
