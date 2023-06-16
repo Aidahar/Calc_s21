@@ -2,6 +2,22 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QRegularExpressionValidator>
+#include <QString>
+#include <QCoreApplication>
+
+
+extern "C" {
+    #include "parse_string.h"
+    #include "calculate.h"
+    #include "stack.h"
+    #include "s21_helper.h"
+    #include <locale.h>
+    #include "credit_calc.h"
+}
+
+#include "qcustomplot.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -81,7 +97,19 @@ private slots:
 
     void on_Mod_clicked();
 
+    void on_X_clicked();
+
+    void on_equal_clicked();
+
+    void check_param_scale(double *a, double *b, double *h);
+
+    void on_pushButton_clicked();
+
+    void on_calc_credit_clicked();
+
 private:
     Ui::MainWindow *ui;
+    QCustomPlot *customPlot;
+    QCPGraph *graphic;
 };
 #endif // MAINWINDOW_H
