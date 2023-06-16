@@ -1,4 +1,9 @@
-#ifndef CREDIT_CALC_H_
-#define CREDIT_CALC_H
+#ifndef SRC_CREDIT_CALC_H_
+#define SRC_CREDIT_CALC_H_
 
-#endif  // CREDIT_CALC_H
+#include "s21_helper.h"
+
+double calculate_annuitet(double tel_cred, double proc_cred, int month_cred);
+double annuitet_percent(double tel_cred, double proc_cred, int month_cred);
+double annuitet_dolg_proc(double tel_cred, double proc_cred, int month_cred);
+#endif

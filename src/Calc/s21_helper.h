@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "math.h"
+
 enum status { ERR, OK };
 enum prior { BR, P_M, M_D, POW, SIN };
 
