@@ -13,6 +13,7 @@ extern "C" {
     #include "stack.h"
     #include "s21_helper.h"
     #include <locale.h>
+    #include "credit_calc.h"
 }
 
 #include "qcustomplot.h"
@@ -103,6 +104,8 @@ private slots:
     void check_param_scale(double *a, double *b, double *h);
 
     void on_pushButton_clicked();
+
+    void on_calc_credit_clicked();
 
 private:
     Ui::MainWindow *ui;
