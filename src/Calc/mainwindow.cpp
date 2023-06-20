@@ -532,17 +532,16 @@ void MainWindow::on_calc_credit_clicked() {
   double proc_cred = ui->percent_credit->text().toDouble();
   int month_cred;
   if (ui->year->currentText() == "месяцев") {
-      month_cred = ui->time_credit->text().toInt();
+    month_cred = ui->time_credit->text().toInt();
   }
-  if (ui->year->currentText() == "лет"){
-      if (50 < ui->time_credit->text().toInt()) {
-          QMessageBox errMsg;
-          errMsg.about(this, "WARNING!!!",
-                       "Срок не может превышать 50 лет!");
-          ui->time_credit->setValue(50);
-      } else {
-          month_cred = ui->time_credit->text().toInt() * 12;
-      }
+  if (ui->year->currentText() == "лет") {
+    if (50 < ui->time_credit->text().toInt()) {
+      QMessageBox errMsg;
+      errMsg.about(this, "WARNING!!!", "Срок не может превышать 50 лет!");
+      ui->time_credit->setValue(50);
+    } else {
+      month_cred = ui->time_credit->text().toInt() * 12;
+    }
   }
   if (ui->annuitet_button->isChecked()) {
     double ans_anu = calculate_annuitet(tel_cred, proc_cred, month_cred);
@@ -552,7 +551,7 @@ void MainWindow::on_calc_credit_clicked() {
     ui->month_pay->setText(a.setNum(ans_anu, 'f', 2));
     ui->credit_pay->setText(a.setNum(perc_anu, 'f', 2));
     ui->total_pay->setText(a.setNum(total_anu, 'f', 2));
-  } else if (ui->diff_button->isChecked()){
+  } else if (ui->diff_button->isChecked()) {
     double dif_first = dif_month_min(tel_cred, proc_cred, month_cred);
     double dif_last = dif_month_max(tel_cred, proc_cred, month_cred);
     double dif_perc = dif_pereplat(tel_cred, proc_cred, month_cred);
@@ -568,12 +567,11 @@ void MainWindow::on_calc_credit_clicked() {
   }
 }
 
-void MainWindow::on_time_credit_textChanged(const QString &arg1)
-{
-    if (ui->year->currentText() == "месяцев") {
-        ui->time_credit->setRange(1, 600);
-    }
-    if (ui->year->currentText() == "лет"){
-        ui->time_credit->setRange(1, 50);
-    }
+void MainWindow::on_time_credit_textChanged(const QString& arg1) {
+  if (ui->year->currentText() == "месяцев") {
+    ui->time_credit->setRange(1, 600);
+  }
+  if (ui->year->currentText() == "лет") {
+    ui->time_credit->setRange(1, 50);
+  }
 }
