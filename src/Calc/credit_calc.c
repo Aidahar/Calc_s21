@@ -1,10 +1,12 @@
 #include "credit_calc.h"
 
-int main(void) {
-  printf("первый платеж = %f\n", dif_month_min(20000.0, 12.0, 3 * 12));
-  printf("последний платеж = %f\n", dif_month_max(20000.0, 12.0, 3 * 12));
-  return 0;
-}
+// int main(void) {
+//   printf("первый платеж = %.2f\n", dif_month_min(260000.0, 13.9, 60));
+//   printf("последний платеж = %.2f\n", dif_month_max(260000.0, 13.9, 60));
+//   printf("переплата по кредиту = %.2f\n", dif_pereplat(260000.0, 13.9, 60));
+//   printf("полная выплата = %.2f\n", dif_total(260000.0, 13.9, 60));
+//   return 0;
+// }
 
 /*
   @breef Функция расчета аннуиентного платежа
@@ -49,28 +51,63 @@ double annuitet_dolg_proc(double tel_cred, double proc_cred, int month_cred) {
 }
 
 /*
-  @breef Функция расчета минимального платежа для дифференцированных платежей
+  @breef Функция расчета первого платежа для дифференцированных платежей
   @params tel_cred тело кредита
   @params proc_cred процентная ставка
   @params month_cred период на который выдан кредит
 */
 double dif_month_min(double tel_cred, double proc_cred, int month_cred) {
   double ans = 0.0;
-  double od = tel_cred / month_cred;
-  ans = od + (tel_cred - od) * month_cred / 12;
+  ans = tel_cred / month_cred;
+  double i = proc_cred/100;
+  ans = floor(ans * 100.0 + 0.5) / 100.0;
+  ans = ans + (tel_cred - ans*0)*i/12;
   return ans;
 }
 /*
-  @breef Функция расчета минимального платежа для дифференцированных платежей
+  @breef Функция расчета последнего платежа для дифференцированных платежей
   @params tel_cred тело кредита
   @params proc_cred процентная ставка
   @params month_cred период на который выдан кредит
-  https://maintransport.ru/wiki/differenczirovannyij-platyozh-po-kreditu
-  https://calcus.ru/kreditnyj-kalkulyator?input={%22currency%22:%22RUB%22,%22credit_sum_max%22:%22%22,%22type%22:%222%22,%22cost%22:%220%22,%22start_sum_type%22:%221%22,%22start_sum%22:%220%22,%22rest_payment%22:%220%22,%22calc_type%22:%221%22,%22credit_sum%22:%2210%20000%22,%22period%22:%2215%22,%22period_type%22:%22Y%22,%22percent%22:%2229%22,%22payment_type%22:%221%22}
 */
 double dif_month_max(double tel_cred, double proc_cred, int month_cred) {
   double ans = 0.0;
-  double od = tel_cred / month_cred;
-  ans = od + (tel_cred - od * month_cred) * month_cred / 12;
+  ans = tel_cred / month_cred;
+  double i = proc_cred/100;
+  // ans = floor(ans * 100.0 + 0.5) / 100.0;
+  ans = ans + (tel_cred - ans*(month_cred-1))*i/12;
+  return ans;
+}
+/*
+  @breef Функция расчета переплаты для дифференцированных платежей
+  @params tel_cred тело кредита
+  @params proc_cred процентная ставка
+  @params month_cred период на который выдан кредит
+*/
+double dif_pereplat(double tel_cred, double proc_cred, int month_cred) {
+  double ans = 0.0;
+  double ep = tel_cred/month_cred;
+  double i = proc_cred/100;
+  int idx;
+  for (idx = 0; idx < month_cred; ++idx) {
+    ans += (ep + (tel_cred - ep*(idx))*i/12);
+  }
+  ans = ans - tel_cred;
+  return ans;
+}
+/*
+  @breef Функция расчета полной выплаты для дифференцированных платежей
+  @params tel_cred тело кредита
+  @params proc_cred процентная ставка
+  @params month_cred период на который выдан кредит
+*/
+double dif_total(double tel_cred, double proc_cred, int month_cred) {
+  double ans = 0.0;
+  double ep = tel_cred/month_cred;
+  double i = proc_cred/100;
+  int idx;
+  for (idx = 0; idx < month_cred; ++idx) {
+    ans += (ep + (tel_cred - ep*(idx))*i/12);
+  }
   return ans;
 }

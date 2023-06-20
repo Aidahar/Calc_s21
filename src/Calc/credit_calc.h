@@ -8,4 +8,6 @@ double annuitet_percent(double tel_cred, double proc_cred, int month_cred);
 double annuitet_dolg_proc(double tel_cred, double proc_cred, int month_cred);
 double dif_month_min(double tel_cred, double proc_cred, int month_cred);
 double dif_month_max(double tel_cred, double proc_cred, int month_cred);
+double dif_pereplat(double tel_cred, double proc_cred, int month_cred);
+double dif_total(double tel_cred, double proc_cred, int month_cred);
 #endif

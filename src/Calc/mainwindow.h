@@ -107,6 +107,8 @@ private slots:
 
     void on_calc_credit_clicked();
 
+    void on_time_credit_textChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
     QCustomPlot *customPlot;
