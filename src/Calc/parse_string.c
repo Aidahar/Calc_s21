@@ -14,11 +14,7 @@
 //    free(notation);
 //    return 0;
 //  }
-/*
-  @breef функция перевода строки в польскую нотацию
-  @params data строка данных
-  @params notation строка польской нотации
-*/
+
 int parse_string(char *data, char *notation) {
   int status = ERR;
   if (data && check_correct_string(data)) {

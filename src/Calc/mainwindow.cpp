@@ -544,27 +544,35 @@ void MainWindow::on_calc_credit_clicked() {
           month_cred = ui->time_credit->text().toInt() * 12;
       }
   }
-  if (ui->annuitet_button->isChecked()) {
-    double ans_anu = calculate_annuitet(tel_cred, proc_cred, month_cred);
-    double perc_anu = annuitet_percent(tel_cred, proc_cred, month_cred);
-    double total_anu = annuitet_dolg_proc(tel_cred, proc_cred, month_cred);
-    QString a;
-    ui->month_pay->setText(a.setNum(ans_anu, 'f', 2));
-    ui->credit_pay->setText(a.setNum(perc_anu, 'f', 2));
-    ui->total_pay->setText(a.setNum(total_anu, 'f', 2));
-  } else if (ui->diff_button->isChecked()){
-    double dif_first = dif_month_min(tel_cred, proc_cred, month_cred);
-    double dif_last = dif_month_max(tel_cred, proc_cred, month_cred);
-    double dif_perc = dif_pereplat(tel_cred, proc_cred, month_cred);
-    double dif_tot = dif_total(tel_cred, proc_cred, month_cred);
-    QString a, b;
-    a.setNum(dif_first, 'f', 2);
-    b.setNum(dif_last, 'f', 2);
-    a.append("...");
-    a.append(b);
-    ui->month_pay->setText(a);
-    ui->credit_pay->setText(a.setNum(dif_perc, 'f', 2));
-    ui->total_pay->setText(a.setNum(dif_tot, 'f', 2));
+  if ( 0.0 >= tel_cred) {
+      QMessageBox errMsg;
+      errMsg.about(this, "Warning", "Сумма кредита не может быть меньше или равна нулю");
+  } else if (0.0 >= proc_cred){
+      QMessageBox errMsg;
+      errMsg.about(this, "Warning", "Процентная ставка не может быть меньше или равна нулю");
+  } else {
+      if (ui->annuitet_button->isChecked()) {
+        double ans_anu = calculate_annuitet(tel_cred, proc_cred, month_cred);
+        double perc_anu = annuitet_percent(tel_cred, proc_cred, month_cred);
+        double total_anu = annuitet_dolg_proc(tel_cred, proc_cred, month_cred);
+        QString a;
+        ui->month_pay->setText(a.setNum(ans_anu, 'f', 2));
+        ui->credit_pay->setText(a.setNum(perc_anu, 'f', 2));
+        ui->total_pay->setText(a.setNum(total_anu, 'f', 2));
+      } else if (ui->diff_button->isChecked()){
+        double dif_first = dif_month_min(tel_cred, proc_cred, month_cred);
+        double dif_last = dif_month_max(tel_cred, proc_cred, month_cred);
+        double dif_perc = dif_pereplat(tel_cred, proc_cred, month_cred);
+        double dif_tot = dif_total(tel_cred, proc_cred, month_cred);
+        QString a, b;
+        a.setNum(dif_first, 'f', 2);
+        b.setNum(dif_last, 'f', 2);
+        a.append("...");
+        a.append(b);
+        ui->month_pay->setText(a);
+        ui->credit_pay->setText(a.setNum(dif_perc, 'f', 2));
+        ui->total_pay->setText(a.setNum(dif_tot, 'f', 2));
+      }
   }
 }
 
