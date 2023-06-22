@@ -47,11 +47,11 @@ void pop_back(node **patr, int *prior, char *symb);
 */
 void free_node(node **patr);
 
-/**
-  @brief Вспомогательная функция для просмотра стека
-  @param patr структура
-*/
-void print_list(node *patr);
+// /**
+//   @brief Вспомогательная функция для просмотра стека
+//   @param patr структура
+// */
+// void print_list(node *patr);
 /**
   @brief Вспомогательная функция для проверки на существование стека
   @param stack структура
@@ -88,10 +88,10 @@ int push_back_dnode(double_node **patr, double data);
 */
 void pop_back_double(double_node **patr, double *num);
 
-/**
-  @brief Вспомогательная функция для просмотра стека чисел
-  @param patr структура
-*/
-void print_double_list(double_node *patr);
+// /**
+//   @brief Вспомогательная функция для просмотра стека чисел
+//   @param patr структура
+// */
+// void print_double_list(double_node *patr);
 
 #endif  // SRC_STACK_H

@@ -23,19 +23,17 @@
   @params notation строка польской нотации
 */
 double calculate(char *notation, double x) {
-  double result = 0.0, sec, first, answer;
+  double result = 0.0, answer;
   char *p;
   char double_number[MAXN] = {'\0'};
-  int i;
   double_node *numbers = {0};
-  for (i = 0, p = notation; *p; ++p) {
+  for (p = notation; *p; ++p) {
     if (is_digit(*p)) {
       if ('x' == *p) {
         push_back_dnode(&numbers, x);
       } else {
         result = take_number(&p);
         push_back_dnode(&numbers, result);
-        i = 0;
         memset(double_number, 0, sizeof(double_number));
       }
     } else if (is_operator(*p)) {

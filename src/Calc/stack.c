@@ -36,13 +36,13 @@ void pop_prior(const node *patr, int *prior) {
   }
 }
 
-void print_list(node *patr) {
-  while (NULL != patr) {
-    printf("priority %d ", patr->prior);
-    printf("symbol %c\n", patr->symb);
-    patr = patr->next;
-  }
-}
+// void print_list(node *patr) {
+//   while (NULL != patr) {
+//     printf("priority %d ", patr->prior);
+//     printf("symbol %c\n", patr->symb);
+//     patr = patr->next;
+//   }
+// }
 
 int check_stack(const node *stack) {
   int status = ERR;
@@ -101,9 +101,9 @@ void pop_back_double(double_node **patr, double *num) {
   }
 }
 
-void print_double_list(double_node *patr) {
-  while (NULL != patr) {
-    printf("число %f\n", patr->val);
-    patr = patr->next;
-  }
-}
+// void print_double_list(double_node *patr) {
+//   while (NULL != patr) {
+//     printf("число %f\n", patr->val);
+//     patr = patr->next;
+//   }
+// }

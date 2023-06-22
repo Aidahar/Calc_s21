@@ -15,13 +15,13 @@ int is_digit(char data) {
   return status;
 }
 
-void print_notation(char *data) {
-  while (*data != '\0') {
-    printf("%c", *data);
-    ++data;
-  }
-  printf("\n");
-}
+// void print_notation(char *data) {
+//   while (*data != '\0') {
+//     printf("%c", *data);
+//     ++data;
+//   }
+//   printf("\n");
+// }
 
 int is_func(char *data, struct Node **stack, int *idx) {
   int status = OK, id;
@@ -107,8 +107,6 @@ void push_br(char *stack_br, char br, int *top) {
   ++*top;
   stack_br[*top] = br;
 }
-
-void peek(const char *stack_br, char *br, int top) { *br = stack_br[top]; }
 
 void pop_br(char *stack_br, int *top) {
   stack_br[*top] = '\0';

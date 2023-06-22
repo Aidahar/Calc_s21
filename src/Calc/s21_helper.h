@@ -35,11 +35,11 @@ int is_digit(char data);
   @param data строка
 */
 int len_data(const char *data);
-/**
-  @brief вспомогательная функция отображения польской нотации
-  @param data строка нотации
-*/
-void print_notation(char *data);
+// /**
+//   @brief вспомогательная функция отображения польской нотации
+//   @param data строка нотации
+// */
+// void print_notation(char *data);
 /**
   @brief функция проверяет строку на тригонометрические функции и добавляетв
   стек их символы
@@ -67,13 +67,7 @@ void pop_br(char *stack_br, int *top);
   @param top позиция в стеке
 */
 void push_br(char *stack_br, char br, int *top);
-/**
-  @brief функция проверки приоритета
-  @param stack_br стек
-  @param br скобка
-  @param top позиция в стеке
-*/
-void peek(const char *stack_br, char *br, int top);
+
 /**
   @brief функция проверки числа
   @param data строка данных
